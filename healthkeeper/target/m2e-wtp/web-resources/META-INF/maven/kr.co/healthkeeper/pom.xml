@@ -15,6 +15,55 @@
 	</properties>
 	<dependencies>
 	
+		<!-- log4jdbc-log4j2-jdbc4 라이브러리 추가 -->
+		<dependency>
+    		<groupId>org.bgee.log4jdbc-log4j2</groupId>
+    		<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+    		<version>1.16</version>
+		</dependency>
+	
+		<!-- mybatis 라이브러리 -->
+		<dependency>
+    		<groupId>org.mybatis</groupId>
+    		<artifactId>mybatis</artifactId>
+    		<version>3.5.3</version>
+		</dependency>
+		
+		<!-- mybatis-spring 라이브러리 -->
+		<dependency>
+    		<groupId>org.mybatis</groupId>
+    		<artifactId>mybatis-spring</artifactId>
+    		<version>2.0.5</version>
+		</dependency>
+		
+		<!-- spring-jdbc 라이브러리 -->
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-jdbc</artifactId>
+    		<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- spring-tx 라이브러리 -->
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-tx</artifactId>
+    		<version>${org.springframework-version}</version>
+		</dependency>
+	
+		<!-- HikariCP 라이브러리 추가 -->
+		<dependency>
+   			<groupId>com.zaxxer</groupId>
+   			<artifactId>HikariCP</artifactId>
+   			<version>5.1.0</version>
+		</dependency>
+	
+		<!-- ojdbc10 -->
+		<dependency>
+    		<groupId>com.oracle.database.jdbc</groupId>
+    		<artifactId>ojdbc10</artifactId>
+    		<version>19.8.0.0</version>
+		</dependency>
+	
 		<!-- log4j 추가 -->
 		<dependency>
     		<groupId>log4j</groupId>
@@ -92,10 +141,10 @@
 				
 		<!-- Servlet -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
+    		<groupId>jakarta.servlet</groupId>
+    		<artifactId>jakarta.servlet-api</artifactId>
+    		<version>5.0.0</version>
+    		<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
