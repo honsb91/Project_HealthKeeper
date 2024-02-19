@@ -25,4 +25,16 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<NoticeVO> getlist() {
 		return mapper.getlist();
 	}
+
+	// 공지사항 조회
+	@Override
+	public NoticeVO getPage(int NOTICE_BNO) {
+		return mapper.getPage(NOTICE_BNO);
+	}
+
+	// 공지사항 수정
+	@Override
+	public int notmodify(NoticeVO notice) {
+		return mapper.notmodify(notice);
+	}
 }

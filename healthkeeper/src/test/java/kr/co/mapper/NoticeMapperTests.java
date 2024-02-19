@@ -35,14 +35,40 @@ public class NoticeMapperTests {
 //     }
      
      // 공지사항 목록 테스트
+//     @Test
+//     public void testGetList() {
+//         
+//         List list = mapper.getlist();
+//        /* 일반적 for문 */
+//         for(int i = 0; i < list.size();i++) {
+//             log.info("" + list.get(i));
+//         }
+//     }
+     
+     // 공지사항 조회 테스트
+//     @Test
+//     public void testGetPage() {
+//         
+//         /* 실제 존재하는 페이지 */
+//         int NOTICE_BNO = 10;
+//         
+//         log.info("" + mapper.getPage(NOTICE_BNO));
+//         
+//     }
+     
+     // 공지사항 수정 테스트
      @Test
-     public void testGetList() {
+     public void testnotModify() {
          
-         List list = mapper.getlist();
-        /* 일반적 for문 */
-         for(int i = 0; i < list.size();i++) {
-             log.info("" + list.get(i));
-         }
+         NoticeVO notice = new NoticeVO();
+
+         notice.setNOTICE_BNO(10);
+         notice.setNOTICE_TITLE("Mapper Test22");
+         notice.setNOTICE_CONTENT("Mapper Test 진행중입니다.");
+         
+         int result = mapper.notmodify(notice);
+         log.info("result : " +result);
+         
      }
  
 }

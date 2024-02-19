@@ -30,12 +30,18 @@
 			<c:forEach items="${notlist}" var="list">
             	<tr>
                 	<td><c:out value="${list.NOTICE_BNO}"/></td>
-                	<td><c:out value="${list.NOTICE_TITLE}"/></td>
+                	<td>
+                		<a class="move" href='<c:out value="${list.NOTICE_BNO}"/>'>
+        					<c:out value="${list.NOTICE_TITLE}"/>
+    					</a>
+                    </td>
                 	<td><c:out value="${list.NOTICE_WRITER}"/></td>
                 	<td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.NOTICE_REGDATE}"/></td>
             	</tr>
         	</c:forEach>
 	</table>
+	<form id="moveForm" method="get">    
+    </form>
 </div>
 <script>
 	// 공지사항 등록시 알람창 js 코드
@@ -51,8 +57,24 @@
 			if(result === "registr success"){
 				alert("공지사항이 등록되었습니다.");
 			}
+			
+			if(result === "notmodify success"){
+	            alert("수정이 완료되었습니다.");
+	        }
 		}	
 	});
+	
+	// 공지사항 목록페이지 이동 js 코드
+	let moveForm = $("#moveForm");
+	 
+    $(".move").on("click", function(e){
+        e.preventDefault();
+        moveForm.empty();
+        
+        moveForm.append("<input type='hidden' name='NOTICE_BNO' value='"+ $(this).attr("href")+ "'>");
+        moveForm.attr("action", "/notice/notget");
+        moveForm.submit();
+    });
 </script>
 </body>
 </html>

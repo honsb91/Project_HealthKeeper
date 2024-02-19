@@ -12,5 +12,10 @@ public interface NoticeMapper {
 	// 공지사항 목록
 	public List<NoticeVO> getlist();
 	
+	// 공지사항 조회
+	public NoticeVO getPage(int NOTICE_BNO);
+	
+	// 공지사항 수정
+	public int notmodify(NoticeVO notice);
 
 }

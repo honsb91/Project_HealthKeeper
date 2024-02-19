@@ -23,21 +23,18 @@ public class NoticeController {
 	// log 메서드 사용
 	private static final Logger log = LoggerFactory.getLogger(NoticeController.class);
 	
-	// 게시판 목록페이지
+	// 공지사항 목록페이지
 	@GetMapping("/notlist")
     public void noticeListGET(Model model) {
         
         log.info("공지사항 목록 페이지 진입");
-        
         model.addAttribute("notlist", service.getlist());
-        
     }
     
     @GetMapping("/notregistr")
     public void noticeRegistrGET() {
         
         log.info("공지사항 등록 페이지 진입");
-        
     }
 	
     // 공지사항 등록
@@ -48,6 +45,35 @@ public class NoticeController {
     	service.notregistr(notice);
     	rttr.addFlashAttribute("result", "registr success");
     	return "redirect:/notice/notlist";
+    }
+    
+    // 공지사항 조회
+    @GetMapping("/notget")
+    public void noticeGetPageGET(int NOTICE_BNO, Model model) {
+        
+        model.addAttribute("pageInfo", service.getPage(NOTICE_BNO));
+        
+    }
+    
+    // 공지사항 수정페이지 이동
+    @GetMapping("/notmodify")
+    public void noticeModifyGET(int NOTICE_BNO, Model model) {
+        
+        model.addAttribute("pageInfo", service.getPage(NOTICE_BNO));
+        
+    }
+    
+    // 공지사항 수정
+    @PostMapping("/notmodify")
+    public String noticeModifyPOST(NoticeVO notice, RedirectAttributes rttr) {
+        
+        int rows =service.notmodify(notice);
+        System.out.println("공지글 수정" + rows);
+        
+        rttr.addFlashAttribute("result", "notmodify success");
+        
+        return "redirect:/notice/notlist";
+        
     }
 
 }

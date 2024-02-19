@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.model.NoticeVO;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class NoticeServiceTests {
@@ -31,10 +33,36 @@ public class NoticeServiceTests {
 //    }
     
     // 공지사항 목록 테스트
+//    @Test
+//    public void testGetList() {
+//        
+//        service.getlist().forEach(board -> log.info("" + board));        
+//        
+//    }
+    
+    // 공지사항 조회 테스트
+//    @Test
+//    public void testGetPage() {
+//    	
+//    	int NOTICE_BNO = 10;
+//    	
+//    	log.info("" + service.getPage(NOTICE_BNO));
+//    	
+//    }
+    
+    // 공지사항 수정 테스트
     @Test
-    public void testGetList() {
+    public void testModify() {
         
-        service.getlist().forEach(board -> log.info("" + board));        
+        NoticeVO notice = new NoticeVO();
         
-    }
+        notice.setNOTICE_BNO(10);
+        notice.setNOTICE_TITLE("Service Test333");
+        notice.setNOTICE_CONTENT("Service Test중입니다.");
+        
+        int result = service.notmodify(notice);
+        log.info("result : " +result);
+        
+    } 
+    
 }
