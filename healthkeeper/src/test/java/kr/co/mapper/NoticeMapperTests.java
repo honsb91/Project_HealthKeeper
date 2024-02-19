@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.model.NotCriteria;
 import kr.co.model.NoticeVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -72,12 +73,25 @@ public class NoticeMapperTests {
 //     }
      
      // 공지사항 삭제 테스트
+//     @Test
+//     public void testDelete() {
+//         
+//         int result = mapper.notdelete(9);
+//         log.info("result : " + result);
+//         
+//     }
+     
+     // 공지사항 목록(페이징 적용) 테스트
      @Test
-     public void testDelete() {
+     public void testGetListPaging() {
          
-         int result = mapper.notdelete(9);
-         log.info("result : " + result);
+         NotCriteria ncri = new NotCriteria();
          
+         ncri.setPageNum(2);
+                          
+         List list = mapper.getListPaging(ncri);
+         
+         list.forEach(notice -> log.info("" + notice));
      }
  
 }

@@ -1,5 +1,7 @@
 package kr.co.service;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.model.NotCriteria;
 import kr.co.model.NoticeVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -66,12 +69,23 @@ public class NoticeServiceTests {
 //    } 
     
     // 공지사항 삭제 테스트
+//    @Test
+//    public void testDelete() {
+//        
+//        int result = service.notdelete(8);
+//        log.info("result : " + result);
+//        
+//    }
+    
+    // 공지사항 목록(페이징 적용) 테스트
     @Test
-    public void testDelete() {
+    public void testGetListPaging() {
         
-        int result = service.notdelete(8);
-        log.info("result : " + result);
+        NotCriteria ncri = new NotCriteria();
         
+        List list = service.getListPaging(ncri);
+        
+        list.forEach(notice -> log.info("" + notice));
     }
     
 }

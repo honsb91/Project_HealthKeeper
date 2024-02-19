@@ -14,7 +14,11 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>목록페이지입니다.</h1>
+<div id="notice_header" class="notice_header"> 
+	<p class="nh_title">
+		<span class="blind">HealthKeeper 공지사항입니다.</span>
+	</p> 
+</div>
 
 <div class="table_wrap">
 	<a href="/notice/notregistr" class="top_btn">게시판 등록</a>
@@ -40,7 +44,28 @@
             	</tr>
         	</c:forEach>
 	</table>
-	<form id="moveForm" method="get">    
+	<!-- 번호페이지 구현 -->
+	<div class="pageInfo_wrap" >
+        <div class="pageInfo_area">
+        	<ul id="pageInfo" class="pageInfo">
+        	<!-- 이전페이지 버튼 -->
+                <c:if test="${npageMake.prev}">
+                    <li class="pageInfo_btn previous"><a href="${npageMake.startPage-1}">Previous</a></li>
+                </c:if>
+ 			<!-- 각 번호 페이지 버튼 -->
+                <c:forEach var="num" begin="${npageMake.startPage}" end="${npageMake.endPage}">
+                	<li class="pageInfo_btn ${npageMake.ncri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li>
+                </c:forEach>
+             <!-- 다음페이지 버튼 -->
+                <c:if test="${npageMake.next}">
+                    <li class="pageInfo_btn next"><a href="${npageMake.endPage + 1 }">Next</a></li>
+                </c:if> 
+            </ul>
+        </div>
+    </div>
+	<form id="moveForm" method="get">
+		<input type="hidden" name="pageNum" value="${npageMake.ncri.pageNum }">
+        <input type="hidden" name="amount" value="${npageMake.ncri.amount }">     
     </form>
 </div>
 <script>
@@ -78,6 +103,16 @@
         moveForm.append("<input type='hidden' name='NOTICE_BNO' value='"+ $(this).attr("href")+ "'>");
         moveForm.attr("action", "/notice/notget");
         moveForm.submit();
+    });
+    
+    // 페이지 이동 js 코드
+    $(".pageInfo a").on("click", function(e){
+ 
+        e.preventDefault();
+        moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+        moveForm.attr("action", "/notice/notlist");
+        moveForm.submit();
+        
     });
 </script>
 </body>

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.model.NotCriteria;
+import kr.co.model.NotPageMakeDTO;
 import kr.co.model.NoticeVO;
 import kr.co.service.NoticeService;
 
@@ -23,14 +25,19 @@ public class NoticeController {
 	// log 메서드 사용
 	private static final Logger log = LoggerFactory.getLogger(NoticeController.class);
 	
-	// 공지사항 목록페이지
+	// 공지사항 목록페이지(페이징 적용)
 	@GetMapping("/notlist")
-    public void noticeListGET(Model model) {
+    public void noticeListGET(Model model, NotCriteria ncri) {
         
         log.info("공지사항 목록 페이지 진입");
-        model.addAttribute("notlist", service.getlist());
+        model.addAttribute("notlist", service.getListPaging(ncri));
+        
+        int total = service.getTotal();
+        NotPageMakeDTO npageMake = new NotPageMakeDTO(ncri, total);
+        model.addAttribute("npageMake",npageMake);
     }
     
+	// 공지사항 등록페이지 
     @GetMapping("/notregistr")
     public void noticeRegistrGET() {
         
@@ -49,10 +56,10 @@ public class NoticeController {
     
     // 공지사항 조회
     @GetMapping("/notget")
-    public void noticeGetPageGET(int NOTICE_BNO, Model model) {
+    public void noticeGetPageGET(int NOTICE_BNO, Model model, NotCriteria ncri) {
         
         model.addAttribute("pageInfo", service.getPage(NOTICE_BNO));
-        
+        model.addAttribute("ncri", ncri);
     }
     
     // 공지사항 수정페이지 이동
