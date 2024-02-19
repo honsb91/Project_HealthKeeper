@@ -57,17 +57,26 @@ public class NoticeMapperTests {
 //     }
      
      // 공지사항 수정 테스트
+//     @Test
+//     public void testnotModify() {
+//         
+//         NoticeVO notice = new NoticeVO();
+//
+//         notice.setNOTICE_BNO(10);
+//         notice.setNOTICE_TITLE("Mapper Test22");
+//         notice.setNOTICE_CONTENT("Mapper Test 진행중입니다.");
+//         
+//         int result = mapper.notmodify(notice);
+//         log.info("result : " +result);
+//         
+//     }
+     
+     // 공지사항 삭제 테스트
      @Test
-     public void testnotModify() {
+     public void testDelete() {
          
-         NoticeVO notice = new NoticeVO();
-
-         notice.setNOTICE_BNO(10);
-         notice.setNOTICE_TITLE("Mapper Test22");
-         notice.setNOTICE_CONTENT("Mapper Test 진행중입니다.");
-         
-         int result = mapper.notmodify(notice);
-         log.info("result : " +result);
+         int result = mapper.notdelete(9);
+         log.info("result : " + result);
          
      }
  

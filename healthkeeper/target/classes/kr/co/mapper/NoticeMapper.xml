@@ -28,4 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         NOTICE_CONTENT = #{NOTICE_CONTENT, jdbcType=VARCHAR}
         WHERE NOTICE_BNO = #{NOTICE_BNO}
     </update>
+    
+    <!-- 공지사항 삭제 -->
+    <delete id="notdelete">
+        DELETE FROM NOTICE 
+        WHERE NOTICE_BNO = #{NOTICE_BNO}
+    </delete>
+    
 </mapper>

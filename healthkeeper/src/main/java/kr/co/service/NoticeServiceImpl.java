@@ -37,4 +37,10 @@ public class NoticeServiceImpl implements NoticeService{
 	public int notmodify(NoticeVO notice) {
 		return mapper.notmodify(notice);
 	}
+
+	// 공지사항 삭제
+	@Override
+	public int notdelete(int NOTICE_BNO) {
+		return mapper.notdelete(NOTICE_BNO);
+	}
 }

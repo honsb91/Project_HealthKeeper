@@ -75,5 +75,16 @@ public class NoticeController {
         return "redirect:/notice/notlist";
         
     }
+    
+    // 공지사항 삭제
+    @PostMapping("/notdelete")
+    public String boardDeletePOST(int NOTICE_BNO, RedirectAttributes rttr) {
+        
+        service.notdelete(NOTICE_BNO);
+        
+        rttr.addFlashAttribute("result", "notdelete success");
+        
+        return "redirect:/notice/notlist";
+    }
 
 }

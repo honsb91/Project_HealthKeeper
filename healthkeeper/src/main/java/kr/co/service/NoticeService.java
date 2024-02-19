@@ -17,4 +17,7 @@ public interface NoticeService {
 	
 	// 공지사항 수정
 	public int notmodify(NoticeVO notice);
+	
+	// 공지사항 삭제
+	public int notdelete(int NOTICE_BNO);
 }

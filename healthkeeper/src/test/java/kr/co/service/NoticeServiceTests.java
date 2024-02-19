@@ -51,18 +51,27 @@ public class NoticeServiceTests {
 //    }
     
     // 공지사항 수정 테스트
+//    @Test
+//    public void testModify() {
+//        
+//        NoticeVO notice = new NoticeVO();
+//        
+//        notice.setNOTICE_BNO(10);
+//        notice.setNOTICE_TITLE("Service Test333");
+//        notice.setNOTICE_CONTENT("Service Test중입니다.");
+//        
+//        int result = service.notmodify(notice);
+//        log.info("result : " +result);
+//        
+//    } 
+    
+    // 공지사항 삭제 테스트
     @Test
-    public void testModify() {
+    public void testDelete() {
         
-        NoticeVO notice = new NoticeVO();
+        int result = service.notdelete(8);
+        log.info("result : " + result);
         
-        notice.setNOTICE_BNO(10);
-        notice.setNOTICE_TITLE("Service Test333");
-        notice.setNOTICE_CONTENT("Service Test중입니다.");
-        
-        int result = service.notmodify(notice);
-        log.info("result : " +result);
-        
-    } 
+    }
     
 }

@@ -61,6 +61,10 @@
 			if(result === "notmodify success"){
 	            alert("수정이 완료되었습니다.");
 	        }
+			
+			if(result === "notdelete success"){
+	            alert("삭제가 완료되었습니다.");
+	        }
 		}	
 	});
 	

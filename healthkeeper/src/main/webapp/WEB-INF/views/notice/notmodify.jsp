@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/resources/css/notice/notget.css">
+<link rel="stylesheet" href="/resources/css/notice/notmodify.css">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -39,6 +39,7 @@
 	<div class="btn_wrap">
 		<a class="btn" id="notlist_btn">목록 페이지</a> 
 		<a class="btn" id="notmodify_btn">수정완료</a>
+		<a class="btn" id="notdelete_btn">삭제</a>
 		<a class="btn" id="cancel_btn">수정취소</a>
 	</div>
 	</form>
@@ -49,19 +50,32 @@
 	let form = $("#infoForm");        // 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
 	let mForm = $("#notmodifyForm");    // 페이지 데이터 수정 from
 
-	// 목록 페이지 이동 버튼
+	// 목록페이지 이동 버튼
 	$("#notlist_btn").on("click", function(e){
     	form.find("#NOTICE_BNO").remove();
     	form.attr("action", "/notice/notlist");
     	form.submit();
 	});
 
-	// 수정 하기 버튼
+	// 수정하기 버튼
 	$("#notmodify_btn").on("click", function(e){
     	mForm.submit();
 	});
+	
+	// 삭제버튼
+    $("#notdelete_btn").on("click", function(e){
+    e.preventDefault(); // 기본 동작(폼 전송) 방지
+    
+    // 모달창 표시
+    if (confirm("정말 삭제하시겠습니까?")) {
+        var form = $(this).closest("form");
+        form.attr("action", "/notice/notdelete");
+        form.attr("method", "post");
+        form.submit();
+    	}
+	});
 
-	/* 취소 버튼 */
+	// 취소버튼
 	$("#cancel_btn").on("click", function(e){
     	form.attr("action", "/notice/notget");
     	form.submit();
