@@ -56,7 +56,7 @@ public class NoticeController {
     
     // 공지사항 조회
     @GetMapping("/notget")
-    public void noticeGetPageGET(int NOTICE_BNO, Model model, NotCriteria ncri) {
+    public void noticeGetPageGET(int NOTICE_BNO, int pageNum, Model model, NotCriteria ncri) {
         
         model.addAttribute("pageInfo", service.getPage(NOTICE_BNO));
         model.addAttribute("ncri", ncri);
@@ -64,9 +64,10 @@ public class NoticeController {
     
     // 공지사항 수정페이지 이동
     @GetMapping("/notmodify")
-    public void noticeModifyGET(int NOTICE_BNO, Model model) {
+    public void noticeModifyGET(int NOTICE_BNO, Model model, NotCriteria ncri) {
         
         model.addAttribute("pageInfo", service.getPage(NOTICE_BNO));
+        model.addAttribute("ncri", ncri);
         
     }
     

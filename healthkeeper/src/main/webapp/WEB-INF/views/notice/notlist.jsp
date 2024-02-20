@@ -50,7 +50,7 @@
         	<ul id="pageInfo" class="pageInfo">
         	<!-- 이전페이지 버튼 -->
                 <c:if test="${npageMake.prev}">
-                    <li class="pageInfo_btn previous"><a href="${npageMake.startPage-1}">Previous</a></li>
+                    <li class="pageInfo_btn previous"><a href="${npageMake.startPage-1}">이전</a></li>
                 </c:if>
  			<!-- 각 번호 페이지 버튼 -->
                 <c:forEach var="num" begin="${npageMake.startPage}" end="${npageMake.endPage}">
@@ -58,7 +58,7 @@
                 </c:forEach>
              <!-- 다음페이지 버튼 -->
                 <c:if test="${npageMake.next}">
-                    <li class="pageInfo_btn next"><a href="${npageMake.endPage + 1 }">Next</a></li>
+                    <li class="pageInfo_btn next"><a href="${npageMake.endPage + 1 }">다음</a></li>
                 </c:if> 
             </ul>
         </div>
@@ -98,7 +98,7 @@
 	 
     $(".move").on("click", function(e){
         e.preventDefault();
-        moveForm.empty();
+//         moveForm.empty();
         
         moveForm.append("<input type='hidden' name='NOTICE_BNO' value='"+ $(this).attr("href")+ "'>");
         moveForm.attr("action", "/notice/notget");
