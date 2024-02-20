@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/notice/notregistr.css">
 </head>
 <body>
 <h1>공지사항 작성페이지</h1>

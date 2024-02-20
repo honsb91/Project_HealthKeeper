@@ -1,36 +1,54 @@
-.input_wrap{
-	padding: 5px 20px;
+/* 조회 페이지 전체 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
 }
-label{
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    color: #007bff;
+}
+
+.input_wrap {
+    margin-bottom: 20px;
+}
+
+.input_wrap label {
     display: block;
-    margin: 10px 0;
-    font-size: 20px;	
+    margin-bottom: 5px;
+    font-weight: bold;
 }
-input{
-	padding: 5px;
-    font-size: 17px;
-}
-textarea{
-	width: 800px;
-    height: 200px;
-    font-size: 15px;
+
+.input_wrap input,
+.input_wrap textarea {
+    width: 100%;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    resize: vertical;
 }
-.btn{
-  	display: inline-block;
-    font-size: 22px;
-    padding: 6px 12px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    font-weight: 600;
-    width: 140px;
-    height: 41px;
-    line-height: 39px;
-    text-align : center;
-    margin-left : 30px;
-    cursor : pointer;
+
+.btn_wrap {
+    text-align: center;
 }
-.btn_wrap{
-	padding-left : 80px;
-	margin-top : 50px;
+
+.btn_wrap .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn_wrap .btn:hover {
+    background-color: #0056b3;
 }
