@@ -53,7 +53,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 공지사항 총 갯수
 	@Override
-	public int getTotal() {
-		return mapper.getTotal();
+	public int getTotal(NotCriteria ncri) {
+		return mapper.getTotal(ncri);
 	}
 }

@@ -32,7 +32,7 @@ public class NoticeController {
         log.info("공지사항 목록 페이지 진입");
         model.addAttribute("notlist", service.getListPaging(ncri));
         
-        int total = service.getTotal();
+        int total = service.getTotal(ncri);
         NotPageMakeDTO npageMake = new NotPageMakeDTO(ncri, total);
         model.addAttribute("npageMake",npageMake);
     }

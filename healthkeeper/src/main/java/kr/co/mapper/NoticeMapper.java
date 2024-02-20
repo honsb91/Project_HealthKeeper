@@ -26,6 +26,6 @@ public interface NoticeMapper {
 	public int notdelete(int NOTICE_BNO);
 	
 	// 공지사항 총 갯수
-	public int getTotal();
+	public int getTotal(NotCriteria ncri);
 
 }

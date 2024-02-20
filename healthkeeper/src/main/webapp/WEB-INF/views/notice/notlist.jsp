@@ -16,7 +16,7 @@
 <body>
 <div id="notice_header" class="notice_header"> 
 	<p class="nh_title">
-		<span class="blind">HealthKeeper 공지사항입니다.</span>
+		<span class="blind">HealthKeeper 공지사항</span>
 	</p> 
 </div>
 
@@ -44,6 +44,23 @@
             	</tr>
         	</c:forEach>
 	</table>
+	<!-- 검색기능 구현 -->
+	<div class="search_wrap">
+        <div class="search_area">
+        	<select name="type">
+                <option value="" <c:out value="${npageMake.ncri.type == null?'selected':'' }"/>>--</option>
+                <option value="T" <c:out value="${npageMake.ncri.type eq 'T'?'selected':'' }"/>>제목</option>
+                <option value="C" <c:out value="${npageMake.ncri.type eq 'C'?'selected':'' }"/>>내용</option>
+                <option value="W" <c:out value="${npageMake.ncri.type eq 'W'?'selected':'' }"/>>작성자</option>
+                <option value="TC" <c:out value="${npageMake.ncri.type eq 'TC'?'selected':'' }"/>>제목 + 내용</option>
+                <option value="TW" <c:out value="${npageMake.ncri.type eq 'TW'?'selected':'' }"/>>제목 + 작성자</option>
+                <option value="TCW" <c:out value="${npageMake.ncri.type eq 'TCW'?'selected':'' }"/>>제목 + 내용 + 작성자</option>
+            </select>  
+            <input type="text" name="keyword" value="${npageMake.ncri.keyword }">
+            <button>Search</button>
+        </div>
+    </div>
+	
 	<!-- 번호페이지 구현 -->
 	<div class="pageInfo_wrap" >
         <div class="pageInfo_area">
@@ -65,7 +82,9 @@
     </div>
 	<form id="moveForm" method="get">
 		<input type="hidden" name="pageNum" value="${npageMake.ncri.pageNum }">
-        <input type="hidden" name="amount" value="${npageMake.ncri.amount }">     
+        <input type="hidden" name="amount" value="${npageMake.ncri.amount }">
+        <input type="hidden" name="keyword" value="${npageMake.ncri.keyword }">
+        <input type="hidden" name="type" value="${npageMake.ncri.type }">     
     </form>
 </div>
 <script>
@@ -98,7 +117,6 @@
 	 
     $(".move").on("click", function(e){
         e.preventDefault();
-//         moveForm.empty();
         
         moveForm.append("<input type='hidden' name='NOTICE_BNO' value='"+ $(this).attr("href")+ "'>");
         moveForm.attr("action", "/notice/notget");
@@ -112,8 +130,70 @@
         moveForm.find("input[name='pageNum']").val($(this).attr("href"));
         moveForm.attr("action", "/notice/notlist");
         moveForm.submit();
-        
     });
+    
+    // 검색버튼 작동 js 코드
+    $(".search_area button").on("click", function(e) {
+    e.preventDefault();
+    let type = $(".search_area select").val();
+    let keyword = $(".search_area input[name='keyword']").val();
+
+    // 검색 종류와 검색어 모두가 비어있는 경우
+    if (!type && !keyword) {
+        moveForm.find("input[name='type']").val('');
+        moveForm.find("input[name='keyword']").val('');
+        moveForm.find("input[name='pageNum']").val(1);
+        moveForm.submit();
+        return;
+    }
+    // 검색어가 비어있는 경우
+    if (!keyword) {
+        alert("키워드를 입력하세요.");
+        return false;
+    }
+    // 검색 종류를 선택하지 않은 경우
+    if (!type) {
+        alert("검색 종류를 선택하세요.");
+        return false;
+    }
+
+    moveForm.find("input[name='type']").val(type);
+    moveForm.find("input[name='keyword']").val(keyword);
+    moveForm.find("input[name='pageNum']").val(1);
+    moveForm.submit();
+});
+
+	$(".search_area input[name='keyword']").on("keypress", function(e) {
+    	if (e.which === 13) { // Enter 키 눌렀을 때
+        	e.preventDefault();
+        	let type = $(".search_area select").val();
+        	let keyword = $(".search_area input[name='keyword']").val();
+
+        // 검색 종류와 검색어 모두가 비어있는 경우
+        if (!type && !keyword) {
+            moveForm.find("input[name='type']").val('');
+            moveForm.find("input[name='keyword']").val('');
+            moveForm.find("input[name='pageNum']").val(1);
+            moveForm.submit();
+            return;
+        }
+        // 검색어가 비어있는 경우
+        if (!keyword) {
+            alert("키워드를 입력하세요.");
+            return false;
+        }
+        // 검색 종류를 선택하지 않은 경우
+        if (!type) {
+            alert("검색 종류를 선택하세요.");
+            return false;
+        }
+
+        moveForm.find("input[name='type']").val(type);
+        moveForm.find("input[name='keyword']").val(keyword);
+        moveForm.find("input[name='pageNum']").val(1);
+        moveForm.submit();
+    }
+});
 </script>
 </body>
 </html>

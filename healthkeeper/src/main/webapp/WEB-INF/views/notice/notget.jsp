@@ -42,7 +42,9 @@
 	<form id="infoForm" action="/notice/notmodify" method="get">
 		<input type="hidden" id="NOTICE_BNO" name="NOTICE_BNO" value='<c:out value="${pageInfo.NOTICE_BNO}"/>'>
 		<input type="hidden" name="pageNum" value='<c:out value="${ncri.pageNum}"/>'>
-        <input type="hidden" name="amount" value='<c:out value="${ncri.amount}"/>'> 
+        <input type="hidden" name="amount" value='<c:out value="${ncri.amount}"/>'>
+        <input type="hidden" name="type" value="${ncri.type }">
+        <input type="hidden" name="keyword" value="${ncri.keyword }">  
 	</form>
 <script>
 	let form = $("#infoForm");

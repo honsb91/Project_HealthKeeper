@@ -38,14 +38,14 @@ p {
 }
 
 .blind {
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    margin: -1px;
-    width: 1px;
-    height: 1px;
-    text-align:center;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	margin: -1px;
+	width: 1px;
+	height: 1px;
+	text-align: center;
 	font-size: 25px;
-    font-family: Dotum,'돋움',Helvetica,AppleSDGothicNeo,sans-serif;
+	font-family: Dotum, '돋움', Helvetica, AppleSDGothicNeo, sans-serif;
 }
 
 /* 테이블 스타일 */
@@ -122,4 +122,24 @@ th {
 .pageInfo_btn.active {
 	background-color: #007bff;
 	color: white;
+}
+
+.search_area {
+	display: inline-block;
+	margin-top: 30px;
+	margin-left: 260px;
+}
+
+.search_area input {
+	height: 30px;
+	width: 250px;
+}
+
+.search_area button {
+	width: 100px;
+	height: 36px;
+}
+
+.search_area select{
+	height: 35px;
 }
