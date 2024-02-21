@@ -14,7 +14,7 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>조회 페이지</h1>
+<h1>수정 페이지</h1>
 <form id="notmodifyForm" action="/notice/notmodify" method="post">
 	<div class="input_wrap">
 		<label>게시판 번호</label>

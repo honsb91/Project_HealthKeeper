@@ -57,7 +57,9 @@ public class NoticeController {
     // 공지사항 조회
     @GetMapping("/notget")
     public void noticeGetPageGET(int NOTICE_BNO, int pageNum, Model model, NotCriteria ncri) {
-        
+
+    	service.noticeViews(NOTICE_BNO);
+    	
         model.addAttribute("pageInfo", service.getPage(NOTICE_BNO));
         model.addAttribute("ncri", ncri);
     }

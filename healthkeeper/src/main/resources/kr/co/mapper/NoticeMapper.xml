@@ -18,10 +18,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 공지사항 목록(페이징 유지처리) -->
     <select id="getListPaging" resultType="kr.co.model.NoticeVO">
     <![CDATA[
-        SELECT NOTICE_BNO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER, NOTICE_REGDATE
+        SELECT NOTICE_BNO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER, NOTICE_REGDATE, NOTICE_VIEWS
         FROM (
               SELECT /*+INDEX_DESC(NOTICE PK_NOTICE) */ 
-              ROWNUM AS RN, NOTICE_BNO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER, NOTICE_REGDATE
+              ROWNUM AS RN, NOTICE_BNO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER, NOTICE_REGDATE,NOTICE_VIEWS
               FROM NOTICE 
               WHERE ROWNUM <= #{pageNum} * #{amount} 
               ]]>
@@ -82,4 +82,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </foreach>
         </trim>
     </sql>
+    
+    <!-- 게시판 조회수 -->
+    <update id="noticeViews">
+    	UPDATE NOTICE
+    	SET 
+    	NOTICE_VIEWS = NOTICE_VIEWS + 1
+    	WHERE NOTICE_BNO = #{NOTICE_BNO}
+    </update> 
 </mapper>

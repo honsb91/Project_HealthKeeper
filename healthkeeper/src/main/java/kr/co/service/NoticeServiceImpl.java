@@ -56,4 +56,11 @@ public class NoticeServiceImpl implements NoticeService{
 	public int getTotal(NotCriteria ncri) {
 		return mapper.getTotal(ncri);
 	}
+
+	// 공지사항 조회수
+	@Override
+	public int noticeViews(int NOTICE_BNO) {
+		return mapper.noticeViews(NOTICE_BNO);
+	}
+
 }

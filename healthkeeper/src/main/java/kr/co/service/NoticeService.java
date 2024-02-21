@@ -27,4 +27,7 @@ public interface NoticeService {
 	
 	// 공지사항 총 갯수
 	public int getTotal(NotCriteria ncri);
+	
+	// 공지사항 조회수
+	public int noticeViews(int NOTICE_BNO);
 }

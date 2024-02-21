@@ -29,6 +29,7 @@
 				<th class="title_width">제목</th>
 				<th class="writer_width">작성자</th>
 				<th class="regdate_width">작성일</th>
+				<th class="views_width">조회수</th>
 			</tr>
 		</thead>
 			<c:forEach items="${notlist}" var="list">
@@ -41,6 +42,7 @@
                     </td>
                 	<td><c:out value="${list.NOTICE_WRITER}"/></td>
                 	<td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.NOTICE_REGDATE}"/></td>
+                	<td><c:out value="${list.NOTICE_VIEWS}"/></td>
             	</tr>
         	</c:forEach>
 	</table>
