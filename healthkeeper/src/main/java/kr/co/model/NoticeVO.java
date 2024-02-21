@@ -24,4 +24,6 @@ public class NoticeVO {
 	
 	// 공지사항 조회수
 	private int NOTICE_VIEWS;
+	
+	
 }

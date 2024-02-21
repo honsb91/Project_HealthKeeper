@@ -10,7 +10,7 @@
 <body>
 <h1>공지사항 작성페이지</h1>
 
-<form action="/notice/notregistr" method="post">
+<form action="/notice/notregistr" method="post" enctype="multipart/form-data">
     <div class="input_wrap">
         <label>Title</label>
         <input name="NOTICE_TITLE">
@@ -23,6 +23,8 @@
         <label>Writer</label>
         <input name="NOTICE_WRITER">
     </div>
+    <input type="file" name="file">
+    
     <button class="notbtn">등록</button>
 </form>
 </body>

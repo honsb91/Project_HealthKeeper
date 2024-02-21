@@ -1,13 +1,18 @@
 package kr.co.service;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.mapper.NoticeMapper;
 import kr.co.model.NotCriteria;
 import kr.co.model.NoticeVO;
+import kr.co.util.FileUtils;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
@@ -15,10 +20,19 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	private NoticeMapper mapper;
 	
+	@Resource(name="fileUtils")
+	private FileUtils fileUtils;
+	
 	// 공지사항 등록
 	@Override
-	public void notregistr(NoticeVO notice) {
+	public void notregistr(NoticeVO notice , MultipartHttpServletRequest notRequest) throws Exception {
 		mapper.notregistr(notice);
+		
+		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(notice, notRequest);
+		int size = list.size();
+		for(int i=0; i<size; i++) {
+			mapper.insertFile(list.get(i));
+		}
 	}
 
 	// 공지사항 목록

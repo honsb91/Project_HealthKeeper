@@ -5,10 +5,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.co.mapper.NoticeMapper">
  
  	<!-- 공지사항 등록 -->
- 	<insert id="notregistr">
- 		INSERT INTO NOTICE (NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER)
- 		VALUES (#{NOTICE_TITLE},#{NOTICE_CONTENT},#{NOTICE_WRITER})
- 	</insert>
+ 	<insert id="notregistr" parameterType="kr.co.model.NoticeVO" useGeneratedKeys="true">
+    <selectKey keyProperty="NOTICE_BNO" resultType="int" order="AFTER">
+        SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    INSERT INTO NOTICE (NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER)
+    VALUES (#{NOTICE_TITLE}, #{NOTICE_CONTENT}, #{NOTICE_WRITER})
+</insert>
  	
  	<!-- 공지사항 목록 -->
     <select id="getlist" resultType="kr.co.model.NoticeVO">
@@ -83,11 +86,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </trim>
     </sql>
     
-    <!-- 게시판 조회수 -->
+    <!-- 공지사항 조회수 -->
     <update id="noticeViews">
     	UPDATE NOTICE
     	SET 
     	NOTICE_VIEWS = NOTICE_VIEWS + 1
     	WHERE NOTICE_BNO = #{NOTICE_BNO}
     </update> 
+    
+    <!-- 공지사항 파일첨부 -->
+    <insert id="insertFile" parameterType="hashMap">
+    	INSERT INTO FILES( FILE_ID, FILE_NAME, FILE_PATH, FILE_SIZE, NOTICE_BNO )
+    	VALUES(FILES_SEQ.NEXTVAL,#{FILE_NAME},#{FILE_PATH},#{FILE_SIZE},#{NOTICE_BNO, jdbcType=NUMERIC})
+    </insert>
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.model.NotCriteria;
@@ -46,10 +47,10 @@ public class NoticeController {
 	
     // 공지사항 등록
     @PostMapping("/notregistr")
-    public String noticeRegistrPOST(NoticeVO notice, RedirectAttributes rttr) {
+    public String noticeRegistrPOST(NoticeVO notice, RedirectAttributes rttr, MultipartHttpServletRequest notRequest)throws Exception {
     	
     	log.info("NoticeVO: " + notice);
-    	service.notregistr(notice);
+    	service.notregistr(notice, notRequest);
     	rttr.addFlashAttribute("result", "registr success");
     	return "redirect:/notice/notlist";
     }

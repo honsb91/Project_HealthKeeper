@@ -1,6 +1,9 @@
 package kr.co.mapper;
 
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.model.NotCriteria;
 import kr.co.model.NoticeVO;
@@ -8,7 +11,7 @@ import kr.co.model.NoticeVO;
 public interface NoticeMapper {
 	
 	// 공지사항 등록
-	public void notregistr(NoticeVO notice);
+	public void notregistr(NoticeVO notice)throws Exception;
 	
 	// 공지사항 목록
 	public List<NoticeVO> getlist();
@@ -30,5 +33,8 @@ public interface NoticeMapper {
 	
 	// 공지사항 조회수
 	public int noticeViews(int NOTICE_BNO);
+	
+	// 공지사항 파일첨부
+	public void insertFile(Map<String, Object> map) throws Exception;
 
 }
