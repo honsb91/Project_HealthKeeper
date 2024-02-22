@@ -1,9 +1,11 @@
 package kr.co.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.model.FilesVO;
 import kr.co.model.NotCriteria;
 import kr.co.model.NoticeVO;
 
@@ -32,4 +34,10 @@ public interface NoticeService {
 	
 	// 공지사항 조회수
 	public int noticeViews(int NOTICE_BNO);
+	
+	// 첨부파일 조회
+	public List<FilesVO> selectFileList(int NOTICE_BNO);
+	
+	// 첨부파일 다운로드
+	public Map<String,Object> selectFileInfo(Map<String, Object> map) throws Exception;
 }

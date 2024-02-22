@@ -6,12 +6,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  	<!-- 공지사항 등록 -->
  	<insert id="notregistr" parameterType="kr.co.model.NoticeVO" useGeneratedKeys="true">
-    <selectKey keyProperty="NOTICE_BNO" resultType="int" order="AFTER">
-        SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
-    </selectKey>
-    INSERT INTO NOTICE (NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER)
-    VALUES (#{NOTICE_TITLE}, #{NOTICE_CONTENT}, #{NOTICE_WRITER})
-</insert>
+    	<selectKey keyProperty="NOTICE_BNO" resultType="int" order="AFTER">
+        	SELECT ISEQ$$_87956.CURRVAL FROM DUAL
+    	</selectKey>
+    		INSERT INTO NOTICE (NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER)
+    		VALUES (#{NOTICE_TITLE}, #{NOTICE_CONTENT}, #{NOTICE_WRITER})
+	</insert>
  	
  	<!-- 공지사항 목록 -->
     <select id="getlist" resultType="kr.co.model.NoticeVO">
@@ -34,8 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <![CDATA[
               )
         WHERE RN > (#{pageNum} -1) * #{amount}
-    ]]>
-</select>
+    	      ]]>
+	</select>
     
     <!-- 공지사항 조회 -->
     <select id="getPage" resultType="kr.co.model.NoticeVO">
@@ -99,4 +99,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	INSERT INTO FILES( FILE_ID, FILE_NAME, FILE_PATH, FILE_SIZE, NOTICE_BNO )
     	VALUES(FILES_SEQ.NEXTVAL,#{FILE_NAME},#{FILE_PATH},#{FILE_SIZE},#{NOTICE_BNO, jdbcType=NUMERIC})
     </insert>
+    
+    <!-- 공지사항 첨부파일 조회 -->
+    <select id="selectFileList" parameterType="int" resultType="kr.co.model.FilesVO">
+    	SELECT FILE_ID, 
+           	   FILE_NAME,
+               FILE_PATH,
+               ROUND(FILE_SIZE/1024,1) AS FILE_SIZE,
+               FILE_REGDATE
+        FROM FILES
+        WHERE NOTICE_BNO = #{NOTICE_BNO}
+	</select>
+	
+	<!-- 공지사항 첨부파일 다운 -->
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT FILE_NAME
+		FROM FILES
+		WHERE FILE_ID = #{FILE_ID}
+	</select>
 </mapper>

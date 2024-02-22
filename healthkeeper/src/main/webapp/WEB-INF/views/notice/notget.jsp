@@ -16,25 +16,35 @@
 <body>
 <h1>조회 페이지</h1>
 	<div class="input_wrap">
-		<label>게시판 번호</label>
+		<label>공지사항 번호</label>
 		<input name="bno" readonly="readonly" value='<c:out value="${pageInfo.NOTICE_BNO}"/>' >
 	</div>
 	<div class="input_wrap">
-		<label>게시판 제목</label>
+		<label>공지사항 제목</label>
 		<input name="title" readonly="readonly" value='<c:out value="${pageInfo.NOTICE_TITLE}"/>' >
 	</div>
 	<div class="input_wrap">
-		<label>게시판 내용</label>
+		<label>공지사항 내용</label>
 		<textarea rows="3" name="content" readonly="readonly"><c:out value="${pageInfo.NOTICE_CONTENT}"/></textarea>
 	</div>
 	<div class="input_wrap">
-		<label>게시판 작성자</label>
+		<label>공지사항 작성자</label>
 		<input name="writer" readonly="readonly" value='<c:out value="${pageInfo.NOTICE_WRITER}"/>' >
 	</div>
 	<div class="input_wrap">
-		<label>게시판 등록일</label>
+		<label>공지사항 등록일</label>
 		<input name="regdate" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.NOTICE_REGDATE}"/>' >
-	</div>		
+	</div>
+	<hr>
+	<span>파일 목록</span>
+	<div class="form-group" style="border: 1px solid #dbdbdb;">
+    	<c:forEach var="file" items="${fileList}">
+        	<a href="#" onclick="fn_fileDown('${file.FILE_ID}'); return false;">
+        	${file.FILE_NAME}</a>(${file.FILE_SIZE} KB)<br>
+    	</c:forEach>
+	</div>
+	<hr>
+
 	<div class="btn_wrap">
 		<a class="btn" id="notlist_btn">목록 페이지</a> 
 		<a class="btn" id="notmodify_btn">수정 하기</a>
@@ -49,16 +59,24 @@
 <script>
 	let form = $("#infoForm");
 	
+	// 공지사항 목록화면 이동 js 코드
 	$("#notlist_btn").on("click", function(e){
 		form.find("#NOTICE_BNO").remove();
 		form.attr("action", "/notice/notlist");
 		form.submit();
 	});
 	
+	// 공지사항 수정화면 이동 js 코드
 	$("#notmodify_btn").on("click", function(e){
 		form.attr("action", "/notice/notmodify");
 		form.submit();
 	});	
+	
+	// 공지사항 첨부파일 다운로드 js 코드
+	function fn_fileDown(fileId) {
+        var url = "/notice/fileDown?FILE_ID=" + fileId;
+        window.location.href = url;
+    }
 </script>	
 </body>
 </html>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 등록</title>
 <link rel="stylesheet" href="/resources/css/notice/notregistr.css">
 </head>
 <body>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.mapper.NoticeMapper;
+import kr.co.model.FilesVO;
 import kr.co.model.NotCriteria;
 import kr.co.model.NoticeVO;
 import kr.co.util.FileUtils;
@@ -75,6 +76,18 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public int noticeViews(int NOTICE_BNO) {
 		return mapper.noticeViews(NOTICE_BNO);
+	}
+
+	// 공지사항 첨부파일 조회
+	@Override
+	public List<FilesVO> selectFileList(int NOTICE_BNO) {
+		return mapper.selectFileList(NOTICE_BNO);
+	}
+
+	// 공지사항 첨부파일 다운로드
+	@Override
+	public Map<String, Object> selectFileInfo(Map<String, Object> map)throws Exception {
+		return mapper.selectFileInfo(map);
 	}
 
 }
