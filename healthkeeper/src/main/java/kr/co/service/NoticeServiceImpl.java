@@ -1,5 +1,6 @@
 package kr.co.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.mapper.NoticeMapper;
@@ -56,8 +58,13 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 공지사항 수정
 	@Override
-	public int notmodify(NoticeVO notice) {
-		return mapper.notmodify(notice);
+	public int notmodify(NoticeVO notice, 
+	                     String[] files, 
+	                     String[] fileNames,
+	                     MultipartHttpServletRequest notRequest) throws Exception {
+	    
+	    // 파일 삭제 여부와 관계없이 게시글 정보만 업데이트
+	    return mapper.notmodify(notice);
 	}
 
 	// 공지사항 삭제
@@ -88,6 +95,18 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public Map<String, Object> selectFileInfo(Map<String, Object> map)throws Exception {
 		return mapper.selectFileInfo(map);
+	}
+
+	// 공지사항 첨부파일 삭제
+	@Override
+	public int deleteFile(int NOTICE_BNO) throws Exception{
+		return mapper.deleteFile(NOTICE_BNO);
+	}
+
+	// 공지사항 파일업로드 수정
+	@Override
+	public List<FilesVO> updateFileList(int NOTICE_BNO) {
+		return mapper.updateFileList(NOTICE_BNO);
 	}
 
 }

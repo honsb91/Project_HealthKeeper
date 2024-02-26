@@ -1,8 +1,10 @@
 package kr.co.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.model.FilesVO;
@@ -24,7 +26,10 @@ public interface NoticeService {
 	public NoticeVO getPage(int NOTICE_BNO);
 	
 	// 공지사항 수정
-	public int notmodify(NoticeVO notice);
+	public int notmodify(NoticeVO notice, 
+						 String[] files, 
+						 String[] fileNames,
+						 MultipartHttpServletRequest notRequest) throws Exception;
 	
 	// 공지사항 삭제
 	public int notdelete(int NOTICE_BNO);
@@ -38,6 +43,14 @@ public interface NoticeService {
 	// 첨부파일 조회
 	public List<FilesVO> selectFileList(int NOTICE_BNO);
 	
+	// 첨부파일 수정조회
+	public List<FilesVO> updateFileList(int NOTICE_BNO);
+	
 	// 첨부파일 다운로드
 	public Map<String,Object> selectFileInfo(Map<String, Object> map) throws Exception;
+	
+	// 첨부파일 삭제
+	public int deleteFile(int NOTICE_BNO) throws Exception;; 
+	
+	
 }

@@ -1,7 +1,10 @@
 package kr.co.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.model.FilesVO;
 import kr.co.model.NotCriteria;
@@ -36,9 +39,23 @@ public interface NoticeMapper {
 	// 공지사항 파일첨부
 	public void insertFile(Map<String, Object> map) throws Exception;
 	
+	public void updateinsertFile(Map<String, Object> map) throws Exception;
+	
 	// 공지사항 첨부파일 조회
 	public List<FilesVO> selectFileList(int NOTICE_BNO);
 	
+	// 공지사항 수정업로드 조회
+	public List<FilesVO> updateFileList(int NOTICE_BNO);
+	
+	// 추가된 파일 목록 조회 메서드 추가
+    public List<FilesVO> getAddedFileList(int NOTICE_BNO);
+	
 	// 공지사항 첨부파일 다운로드
 	public Map<String,Object> selectFileInfo(Map<String, Object> map)throws Exception;
+	
+	// 공지사항 첨부파일 삭제
+	public int deleteFile(int NOTICE_BNO) throws Exception;
+	
+	// 공지사항 수정 시 파일업로드
+	public void updateFile(HashMap<String, Object> map);
 }

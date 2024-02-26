@@ -100,6 +100,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	VALUES(FILES_SEQ.NEXTVAL,#{FILE_NAME},#{FILE_PATH},#{FILE_SIZE},#{NOTICE_BNO, jdbcType=NUMERIC})
     </insert>
     
+    <!-- 공지사항 수정시 파일추가 -->
+    <insert id="updateinsertFile" parameterType="hashMap">
+    INSERT INTO FILES (FILE_ID, FILE_NAME, FILE_PATH, FILE_SIZE, NOTICE_BNO)
+    VALUES (FILES_SEQ.NEXTVAL, #{FILE_NAME}, #{FILE_PATH}, #{FILE_SIZE}, #{NOTICE_BNO, jdbcType=NUMERIC})
+</insert>
+    
     <!-- 공지사항 첨부파일 조회 -->
     <select id="selectFileList" parameterType="int" resultType="kr.co.model.FilesVO">
     	SELECT FILE_ID, 
@@ -109,6 +115,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                FILE_REGDATE
         FROM FILES
         WHERE NOTICE_BNO = #{NOTICE_BNO}
+        ORDER BY FILE_ID ASC
+	</select>
+	
+	<!-- 공지사항 첨부파일 조회 -->
+    <select id="updateFileList" parameterType="int" resultType="kr.co.model.FilesVO">
+    	SELECT FILE_ID, 
+           	   FILE_NAME,
+               FILE_PATH,
+               ROUND(FILE_SIZE/1024,1) AS FILE_SIZE,
+               FILE_REGDATE
+        FROM FILES
+        WHERE NOTICE_BNO = #{NOTICE_BNO}
+        ORDER BY FILE_ID ASC
 	</select>
 	
 	<!-- 공지사항 첨부파일 다운 -->
@@ -117,4 +136,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM FILES
 		WHERE FILE_ID = #{FILE_ID}
 	</select>
+	
+	<!-- 첨부파일 삭제 -->
+	<delete id="deleteFile" parameterType="hashMap">
+		DELETE FROM FILES
+		WHERE NOTICE_BNO = #{NOTICE_BNO}
+	</delete>
 </mapper>

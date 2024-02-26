@@ -3,10 +3,12 @@ package kr.co.healthkeeper;
 import java.io.File;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -18,10 +20,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import kr.co.mapper.NoticeMapper;
 import kr.co.model.FilesVO;
 import kr.co.model.NotCriteria;
 import kr.co.model.NotPageMakeDTO;
@@ -34,6 +37,7 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService service;
+	
 	
 	// log 메서드 사용
 	private static final Logger log = LoggerFactory.getLogger(NoticeController.class);
@@ -77,6 +81,16 @@ public class NoticeController {
         // 공지사항 첨부파일 목록
     	List<FilesVO> fileList = service.selectFileList(NOTICE_BNO);
     	model.addAttribute("fileList", fileList);
+    	
+    	// 공지사항 첨부파일 수정업로드
+    	List<FilesVO> updatefile = service.updateFileList(NOTICE_BNO);
+    	model.addAttribute("updatefile",updatefile);
+    	
+		/*
+		 * // 추가된 파일 목록을 모델에 추가 List<FilesVO> addedFileList =
+		 * service.getAddedFileList(NOTICE_BNO); model.addAttribute("addedFileList",
+		 * addedFileList);
+		 */
     }
     
     // 공지사항 수정페이지 이동
@@ -85,16 +99,45 @@ public class NoticeController {
         
         model.addAttribute("pageInfo", service.getPage(NOTICE_BNO));
         model.addAttribute("ncri", ncri);
+        
+        // 공지사항 첨부파일 목록
+    	List<FilesVO> fileList = service.selectFileList(NOTICE_BNO);
+    	model.addAttribute("fileList", fileList);
+    	
+    	// 공지사항 첨부파일 수정업로드
+    	List<FilesVO> updatefile = service.updateFileList(NOTICE_BNO);
+    	model.addAttribute("updatefile",updatefile);
+    	
+		/*
+		 * // 추가된 파일 목록을 모델에 추가 List<FilesVO> addedFileList =
+		 * service.getAddedFileList(NOTICE_BNO); model.addAttribute("addedFileList",
+		 * addedFileList);
+		 */
     }
     
     // 공지사항 수정
     @PostMapping("/notmodify")
-    public String noticeModifyPOST(NoticeVO notice, RedirectAttributes rttr) {
-        
-        service.notmodify(notice);
+    public String noticeModifyPOST(NoticeVO notice, RedirectAttributes rttr,
+                                   HttpServletRequest request,
+                                   MultipartHttpServletRequest notRequest) throws Exception {
+
+        // 파일 삭제 파라미터 추출
+        String[] files = request.getParameterValues("fileIdDel[]");
+        String[] fileNames = request.getParameterValues("fileNameDel[]");
+
+        // 첨부파일 삭제
+        int NOTICE_BNO = notice.getNOTICE_BNO();
+        service.deleteFile(NOTICE_BNO);
+
+
+        // 공지사항 수정
+        service.notmodify(notice, files, fileNames, notRequest);
+
+        // 공지사항 수정에 성공한 경우에만 삭제된 파일 ID 목록을 모델에 추가
         rttr.addFlashAttribute("result", "notmodify success");
         return "redirect:/notice/notlist";
     }
+
     
     // 공지사항 삭제
     @PostMapping("/notdelete")
