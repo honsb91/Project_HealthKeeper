@@ -14,10 +14,14 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <div id="notice_header" class="notice_header"> 
-	<p class="nh_title">
-		<span class="blind">HealthKeeper 공지사항</span>
-	</p> 
+    <!-- 스타일이 적용될 p 태그에 클래스 추가 -->
+    <p class="nh_title">
+        <!-- 스크린 리더를 위한 감춰진 텍스트 -->
+        <span class="blind">HealthKeeper 공지사항</span>
+        HealthKeeper 공지사항 <!-- 텍스트 내용 -->
+    </p> 
 </div>
 
 <div class="table_wrap">
@@ -89,6 +93,7 @@
         <input type="hidden" name="type" value="${npageMake.ncri.type }">     
     </form>
 </div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <script>
 	// 공지사항 등록시 알람창 js 코드
 	$(document).ready(function(){

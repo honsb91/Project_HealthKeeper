@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,148 +8,120 @@
 <title>Welcome BookMall</title>
 <link rel="stylesheet" href="resources/css/main.css">
 </head>
-<body class="hero-anime">	
-
-	<div class="navigation-wrap bg-light start-header start-style">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<nav class="navbar navbar-expand-md navbar-light">
-					
-						<a class="navbar-brand" href="https://front.codes/" target="_blank"><img src="https://assets.codepen.io/1462889/fcy.png" alt=""></a>	
-						
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav ml-auto py-4 py-md-0">
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Action</a>
-										<a class="dropdown-item" href="#">Another action</a>
-										<a class="dropdown-item" href="#">Something else here</a>
-										<a class="dropdown-item" href="#">Another action</a>
-									</div>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="#">Portfolio</a>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="#">Agency</a>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Action</a>
-										<a class="dropdown-item" href="#">Another action</a>
-										<a class="dropdown-item" href="#">Something else here</a>
-										<a class="dropdown-item" href="#">Another action</a>
-									</div>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="#">Journal</a>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="#">Contact</a>
-								</li>
-							</ul>
+<body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="main">Health KeePer</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link" href="contact.html">자주묻는 게시판</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<c:url value='/notice/notlist'/>">공지사항</a></li>
+                            <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">로그인</a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                                    <li><a class="dropdown-item" href="blog-home.html">환자 로그인</a></li>
+                                    <li><a class="dropdown-item" href="blog-post.html">보호자 로그인</a></li>
+                                    <li><a class="dropdown-item" href="blog-post.html">관리자 로그인</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">회원가입</a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                                    <li><a class="dropdown-item" href="portfolio-overview.html">환자 회원가입</a></li>
+                                    <li><a class="dropdown-item" href="portfolio-item.html">보호자 회원가입</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Header-->
+            <header class="bg-dark py-5" style="background-image: url('/resources/assets/img/header.png'); height: 450px;">
+                <div class="container px-5">
+                    <div class="row gx-5 align-items-center justify-content-center">
+                        <div class="col-lg-8 col-xl-7 col-xxl-6">
+                        </div>
+                        
+                    </div>
+                </div>
+            </header>
+            <!-- Features section-->
+            <section id="scroll">
+		<div class="container px-5">
+			<div class="row gx-5 align-items-center">
+				<div class="col-lg-6 order-lg-2">
+					<div class="p-5">
+						<img class="img-fluid rounded-circle"
+							src="resources/assets/img/temper.jpg" alt="체온관리 이미지">
+					</div>
+				</div>
+				<div class="col-lg-6 order-lg-1">
+					<div class="p-5">
+						<h2 class="display-4">체온관리</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+							Quod aliquid, mollitia odio veniam sit iste esse assumenda amet
+							aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+							voluptatum molestiae adipisci, beatae obcaecati.</p>
+					</div>
+				</div>
+			</div>
+			<section>
+				<div class="container px-5">
+					<div class="row gx-5 align-items-center">
+						<div class="col-lg-6">
+							<div class="p-5">
+								<img class="img-fluid rounded-circle"
+									src="resources/assets/img/heart.jpg" alt="체온관리 이미지">
+							</div>
 						</div>
-						
-					</nav>		
+						<div class="col-lg-6">
+							<div class="p-5">
+								<h2 class="display-4">심박수관리</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Quod aliquid, mollitia odio veniam sit iste esse assumenda amet
+									aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+									voluptatum molestiae adipisci, beatae obcaecati.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="row gx-5 align-items-center">
+				<div class="col-lg-6 order-lg-2">
+					<div class="p-5">
+						<img class="img-fluid rounded-circle"
+							src="resources/assets/img/fall.jpg" alt="낙상감지 이미지">
+					</div>
+				</div>
+				<div class="col-lg-6 order-lg-1">
+					<div class="p-5">
+						<h2 class="display-4">낙상감지</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+							Quod aliquid, mollitia odio veniam sit iste esse assumenda amet
+							aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+							voluptatum molestiae adipisci, beatae obcaecati.</p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="section full-height">
-		<div class="absolute-center">
-			<div class="section">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-				<h1><span>B</span><span>o</span><span>o</span><span>t</span><span>s</span><span>t</span><span>r</span><span>a</span><span>p</span> <span>4</span><br>
-				<span>m</span><span>e</span><span>n</span><span>u</span></h1>
-				<p>scroll for nav animation</p>	
-						</div>	
-					</div>		
-				</div>		
-			</div>
-			<div class="section mt-5">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-							<div id="switch">
-								<div id="circle"></div>
-							</div>
-						</div>	
-					</div>		
-				</div>			
-			</div>
-		</div>
-	</div>
-	<div class="my-5 py-5">
-	</div>
-  
-<!-- Link to page
-================================================== -->
-
-	<a href="https://front.codes/" class="logo" target="_blank">
-		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">
-	</a>
-
+	</section>
+        </main>
+        <!-- Footer-->
+        <footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-center"> <!-- 텍스트를 중앙으로 정렬하기 위해 justify-content-center 추가 -->
+            <div class="col-auto">
+                <!-- 글씨 크기 키우기 -->
+                <div class="small m-0 text-white" style="font-size: 18px;">
+                    <p class="text-center">Copyright © 2024 A조 최종프로젝트</p> <!-- 텍스트를 가운데로 정렬하기 위해 text-center 추가 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
-<script>
-
-
-/* Please ❤ this if you like it! */
-
-
-(function($) { "use strict";
-
-	$(function() {
-		var header = $(".start-style");
-		$(window).scroll(function() {    
-			var scroll = $(window).scrollTop();
-		
-			if (scroll >= 10) {
-				header.removeClass('start-style').addClass("scroll-on");
-			} else {
-				header.removeClass("scroll-on").addClass('start-style');
-			}
-		});
-	});		
-		
-	//Animation
-	
-	$(document).ready(function() {
-		$('body.hero-anime').removeClass('hero-anime');
-	});
-
-	//Menu On Hover
-		
-	$('body').on('mouseenter mouseleave','.nav-item',function(e){
-			if ($(window).width() > 750) {
-				var _d=$(e.target).closest('.nav-item');_d.addClass('show');
-				setTimeout(function(){
-				_d[_d.is(':hover')?'addClass':'removeClass']('show');
-				},1);
-			}
-	});	
-	
-	//Switch light/dark
-	
-	$("#switch").on('click', function () {
-		if ($("body").hasClass("dark")) {
-			$("body").removeClass("dark");
-			$("#switch").removeClass("switched");
-		}
-		else {
-			$("body").addClass("dark");
-			$("#switch").addClass("switched");
-		}
-	});  
-	
-  })(jQuery); 
-</script>
 </html>

@@ -38,6 +38,12 @@ public class NoticeController {
 	@Autowired
 	private NoticeService service;
 	
+	// test 등록페이지 
+    @GetMapping("/test")
+    public void testGET() {
+        log.info("공지사항 등록 페이지 진입");
+    }
+	
 	
 	// log 메서드 사용
 	private static final Logger log = LoggerFactory.getLogger(NoticeController.class);
