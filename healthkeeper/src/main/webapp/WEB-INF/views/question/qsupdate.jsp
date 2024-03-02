@@ -46,6 +46,7 @@
 	<div class="btn_wrap">
 		<a class="btn" id="qslist_btn">목록 페이지</a> 
 		<a class="btn" id="qsupdate_btn">수정완료</a>
+		<a class="btn" id="qsdelete_btn">삭제</a>
 		<a class="btn" id="cancel_btn">수정취소</a>
 	</div>
 	</form>
@@ -75,6 +76,15 @@
     $("#cancel_btn").on("click", function(e) {
         e.preventDefault(); // 기본 동작 방지
         history.back(); // 브라우저 이전 페이지로 이동
+    });
+	
+ 	// 삭제 버튼 클릭 시 확인 후 삭제 처리
+    $("#qsdelete_btn").on("click", function() {
+        if (confirm("정말 삭제하시겠습니까?")) {
+            $("#qsupdateForm").attr("action", "/question/qsdelete");
+            $("#qsupdateForm").attr("method", "post");
+            $("#qsupdateForm").submit();
+        }
     });
 	
 	// 공지사항 첨부파일 다운로드 js 코드

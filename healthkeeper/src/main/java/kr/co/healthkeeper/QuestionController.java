@@ -67,6 +67,15 @@ public class QuestionController {
 		rttr.addFlashAttribute("result", "update success");
 		
 		return "redirect:/question/qslist"; 
+	}
+	
+	// 질문게시판 삭제
+	@PostMapping("/qsdelete")
+	public String qsDeletePOST(int QS_BNO, RedirectAttributes rttr) {
 		
+		service.delete(QS_BNO);
+		rttr.addFlashAttribute("result", "qsdelete success");
+		
+		return "redirect:/question/qslist";
 	}
 }
