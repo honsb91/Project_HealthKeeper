@@ -1,5 +1,7 @@
 package kr.co.service;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.model.QsCriteria;
 import kr.co.model.QsVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -61,12 +64,25 @@ public class QsServiceTests {
 //	}
 	
 	// 게시판 삭제 테스트
+//	@Test
+//	public void delete() {
+//		
+//		int result = service.delete(7);
+//		
+//		log.info("result : " + result);
+//	}
+	
+	// 게시판 목록 (페이징 적용)
 	@Test
-	public void delete() {
+	public void listPaging() {
 		
-		int result = service.delete(7);
+		QsCriteria qcri = new QsCriteria();
 		
-		log.info("result : " + result);
+		qcri.setPageNum(2);
+		
+		List list = service.getlistPaging(qcri);
+		
+		list.forEach(qs -> log.info("" + qs));
 	}
 
 }

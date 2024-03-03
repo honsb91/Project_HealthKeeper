@@ -16,6 +16,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시판 목록 -->
 	<select id="getlist" resultType="kr.co.model.QsVO">
 		SELECT * FROM QUESTION
+		ORDER BY QS_BNO DESC
+	</select>
+	
+	<!-- 공지사항 목록(페이징 유지처리) -->
+	<select id="getlistPaging" resultType="kr.co.model.QsVO">
+    <![CDATA[
+        SELECT QS_BNO, QS_TITLE, QS_CONTENT, QS_WRITER, QS_REGDATE
+        FROM(        
+              SELECT /*+INDEX_DESC(QUESTION PK_QUESTION) */ 
+              ROWNUM AS RN, QS_BNO, QS_TITLE, QS_CONTENT, QS_WRITER, QS_REGDATE
+              FROM QUESTION 
+              WHERE ROWNUM <= #{pageNum} * #{amount}) 
+        WHERE RN > (#{pageNum} -1) * #{amount}
+    	]]>
+    </select>
+	
+	<!-- 게시판 글 총 갯수 -->
+	<select id="getTotal" resultType="int">
+		SELECT COUNT (*) FROM QUESTION
 	</select>
 	
 	<!-- 게시판 조회 -->

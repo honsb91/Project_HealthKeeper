@@ -52,10 +52,10 @@
 	</form>
 	<form id="infoForm" action="/question/qsupdate" method="get">
 		<input type="hidden" id="QS_BNO" name="QS_BNO" value='<c:out value="${pageInfo.QS_BNO}"/>'>
-		<input type="hidden" name="pageNum" value='<c:out value="${ncri.pageNum}"/>'>
-        <input type="hidden" name="amount" value='<c:out value="${ncri.amount}"/>'>
-        <input type="hidden" name="type" value="${ncri.type }">
-        <input type="hidden" name="keyword" value="${ncri.keyword }">  
+		<input type="hidden" name="pageNum" value='<c:out value="${qcri.pageNum}"/>'>
+        <input type="hidden" name="amount" value='<c:out value="${qcri.amount}"/>'>
+   <%--      <input type="hidden" name="type" value="${qcri.type }">
+        <input type="hidden" name="keyword" value="${qcri.keyword }">   --%>
 	</form>
 <script>
 	let form = $("#infoForm");

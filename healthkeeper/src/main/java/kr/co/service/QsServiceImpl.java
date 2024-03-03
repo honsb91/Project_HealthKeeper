@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.mapper.QsMapper;
+import kr.co.model.QsCriteria;
 import kr.co.model.QsVO;
 
 @Service
@@ -24,6 +25,18 @@ public class QsServiceImpl implements QsService{
 	@Override
 	public List<QsVO> getlist() {
 		return mapper.getlist();
+	}
+	
+	// 게시판 목록(페이징 처리)
+	@Override
+	public List<QsVO> getlistPaging(QsCriteria qcri) {
+		return mapper.getlistPaging(qcri);
+	}
+	
+	// 게시판 글 총 갯수
+	@Override
+	public int getTotal() {
+		return mapper.getTotal();
 	}
 
 	// 게시판 조회

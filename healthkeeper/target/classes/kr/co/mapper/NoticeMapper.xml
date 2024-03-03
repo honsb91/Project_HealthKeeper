@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<!-- 공지사항 목록 -->
     <select id="getlist" resultType="kr.co.model.NoticeVO">
  		SELECT * FROM NOTICE
+ 		ORDER BY NOTICE_BNO DESC
     </select>
     
     <!-- 공지사항 목록(페이징 유지처리) -->

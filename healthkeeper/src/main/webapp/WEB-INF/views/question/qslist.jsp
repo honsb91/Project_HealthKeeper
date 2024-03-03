@@ -72,25 +72,25 @@
         <div class="pageInfo_area">
         	<ul id="pageInfo" class="pageInfo">
         	<!-- 이전페이지 버튼 -->
-                <c:if test="${npageMake.prev}">
-                    <li class="pageInfo_btn previous"><a href="${npageMake.startPage-1}">←</a></li>
+                <c:if test="${qpageMake.prev}">
+                    <li class="pageInfo_btn previous"><a href="${qpageMake.startPage-1}">←</a></li>
                 </c:if>
  			<!-- 각 번호 페이지 버튼 -->
-                <c:forEach var="num" begin="${npageMake.startPage}" end="${npageMake.endPage}">
-                	<li class="pageInfo_btn ${npageMake.ncri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li>
+                <c:forEach var="num" begin="${qpageMake.startPage}" end="${qpageMake.endPage}">
+                	<li class="pageInfo_btn ${qpageMake.qcri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li>
                 </c:forEach>
              <!-- 다음페이지 버튼 -->
-                <c:if test="${npageMake.next}">
-                    <li class="pageInfo_btn next"><a href="${npageMake.endPage + 1 }">→</li>
+                <c:if test="${qpageMake.next}">
+                    <li class="pageInfo_btn next"><a href="${qpageMake.endPage + 1 }">→</li>
                 </c:if> 
             </ul>
         </div>
     </div>
 	<form id="moveForm" method="get">
-		<input type="hidden" name="pageNum" value="${npageMake.ncri.pageNum }">
-        <input type="hidden" name="amount" value="${npageMake.ncri.amount }">
-        <input type="hidden" name="keyword" value="${npageMake.ncri.keyword }">
-        <input type="hidden" name="type" value="${npageMake.ncri.type }">     
+		<input type="hidden" name="pageNum" value="${qpageMake.qcri.pageNum }">
+        <input type="hidden" name="amount" value="${qpageMake.qcri.amount }">
+        <%-- <input type="hidden" name="keyword" value="${qpageMake.qcri.keyword }">
+        <input type="hidden" name="type" value="${qpageMake.qcri.type }">   --%>   
     </form>
 </div>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

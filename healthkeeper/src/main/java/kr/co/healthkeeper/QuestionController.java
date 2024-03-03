@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.model.QsCriteria;
+import kr.co.model.QsPageMakeDTO;
 import kr.co.model.QsVO;
 import kr.co.service.QsService;
 
@@ -23,11 +25,16 @@ public class QuestionController {
 	// log 메서드 사용 => consol창에 더 자세히 볼수있음
 	private static final Logger log = LoggerFactory.getLogger(QuestionController.class);
 	
-	// 질문게시판 목록페이지 진입
+	// 질문게시판 목록페이지(페이징 적용)
 	@GetMapping("/qslist")
-	public void qsListGET(Model model) {
+	public void qsListGET(Model model, QsCriteria qcri) {
+		
 		log.info("질문게시판 페이지 진입");
-		model.addAttribute("qslist", service.getlist());
+		model.addAttribute("qslist", service.getlistPaging(qcri));
+		
+		int total = service.getTotal();
+		QsPageMakeDTO qpageMake = new QsPageMakeDTO(qcri, total);
+		model.addAttribute("qpageMake", qpageMake);
 	}
 	
 
@@ -48,15 +55,17 @@ public class QuestionController {
 	
 	// 질문게시판 조회
 	@GetMapping("/qsget")
-	public void qsGetPageGET(int QS_BNO, Model model) {
+	public void qsGetPageGET(int QS_BNO, Model model, QsCriteria qcri) {
 		model.addAttribute("pageInfo", service.getpage(QS_BNO));
+		model.addAttribute("qcri", qcri);
 	}
 	
 	// 질문게시판 수정페이지 진입
 	@GetMapping("/qsupdate")
-	public void qsUpdateGET(int QS_BNO, Model model) {
+	public void qsUpdateGET(int QS_BNO, Model model, QsCriteria qcri) {
 		
 		model.addAttribute("pageInfo", service.getpage(QS_BNO));
+		model.addAttribute("qcri", qcri);
 	}
 	
 	// 질문게시판 수정

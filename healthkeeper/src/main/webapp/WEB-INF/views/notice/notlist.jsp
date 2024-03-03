@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HealthKeeper 공지사항</title>
+<title>공지사항</title>
 <link rel="stylesheet" href="/resources/css/notice/notlist.css">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
