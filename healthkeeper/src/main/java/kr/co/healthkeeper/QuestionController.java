@@ -32,7 +32,7 @@ public class QuestionController {
 		log.info("질문게시판 페이지 진입");
 		model.addAttribute("qslist", service.getlistPaging(qcri));
 		
-		int total = service.getTotal();
+		int total = service.getTotal(qcri);
 		QsPageMakeDTO qpageMake = new QsPageMakeDTO(qcri, total);
 		model.addAttribute("qpageMake", qpageMake);
 	}

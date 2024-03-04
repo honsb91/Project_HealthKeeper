@@ -54,15 +54,15 @@
 	<div class="search_wrap">
         <div class="search_area">
         	<select name="type">
-                <option value="" <c:out value="${npageMake.ncri.type == null?'selected':'' }"/>>--</option>
-                <option value="T" <c:out value="${npageMake.ncri.type eq 'T'?'selected':'' }"/>>제목</option>
-                <option value="C" <c:out value="${npageMake.ncri.type eq 'C'?'selected':'' }"/>>내용</option>
-                <option value="W" <c:out value="${npageMake.ncri.type eq 'W'?'selected':'' }"/>>작성자</option>
-                <option value="TC" <c:out value="${npageMake.ncri.type eq 'TC'?'selected':'' }"/>>제목 + 내용</option>
-                <option value="TW" <c:out value="${npageMake.ncri.type eq 'TW'?'selected':'' }"/>>제목 + 작성자</option>
-                <option value="TCW" <c:out value="${npageMake.ncri.type eq 'TCW'?'selected':'' }"/>>제목 + 내용 + 작성자</option>
+                <option value="" <c:out value="${qpageMake.qcri.type == null?'selected':'' }"/>>--</option>
+                <option value="T" <c:out value="${qpageMake.qcri.type eq 'T'?'selected':'' }"/>>제목</option>
+                <option value="C" <c:out value="${qpageMake.qcri.type eq 'C'?'selected':'' }"/>>내용</option>
+                <option value="W" <c:out value="${qpageMake.qcri.type eq 'W'?'selected':'' }"/>>작성자</option>
+                <option value="TC" <c:out value="${qpageMake.qcri.type eq 'TC'?'selected':'' }"/>>제목 + 내용</option>
+                <option value="TW" <c:out value="${qpageMake.qcri.type eq 'TW'?'selected':'' }"/>>제목 + 작성자</option>
+                <option value="TCW" <c:out value="${qpageMake.qcri.type eq 'TCW'?'selected':'' }"/>>제목 + 내용 + 작성자</option>
             </select>  
-            <input type="text" name="keyword" value="${npageMake.ncri.keyword }">
+            <input type="text" name="keyword" value="${qpageMake.qcri.keyword }">
             <button>Search</button>
         </div>
     </div>
@@ -89,8 +89,8 @@
 	<form id="moveForm" method="get">
 		<input type="hidden" name="pageNum" value="${qpageMake.qcri.pageNum }">
         <input type="hidden" name="amount" value="${qpageMake.qcri.amount }">
-        <%-- <input type="hidden" name="keyword" value="${qpageMake.qcri.keyword }">
-        <input type="hidden" name="type" value="${qpageMake.qcri.type }">   --%>   
+        <input type="hidden" name="keyword" value="${qpageMake.qcri.keyword }">
+        <input type="hidden" name="type" value="${qpageMake.qcri.type }">
     </form>
 </div>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

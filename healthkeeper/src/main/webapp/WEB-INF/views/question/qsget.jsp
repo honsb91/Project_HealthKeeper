@@ -50,8 +50,8 @@
 		<input type="hidden" id="QS_BNO" name="QS_BNO" value='<c:out value="${pageInfo.QS_BNO}"/>'>
 		<input type="hidden" name="pageNum" value='<c:out value="${qcri.pageNum}"/>'>
         <input type="hidden" name="amount" value='<c:out value="${qcri.amount}"/>'>
-       <%--  <input type="hidden" name="type" value="${qcri.type }">
-        <input type="hidden" name="keyword" value="${qcri.keyword }">  --%> 
+        <input type="hidden" name="keyword" value="${qcri.keyword }">
+        <input type="hidden" name="type" value="${qcri.type }">
 	</form>
 <script>
 	let form = $("#qsinfoForm");

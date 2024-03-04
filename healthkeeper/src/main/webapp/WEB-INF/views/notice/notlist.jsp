@@ -19,7 +19,7 @@
     <!-- 스타일이 적용될 p 태그에 클래스 추가 -->
     <p class="nh_title">
         <!-- 스크린 리더를 위한 감춰진 텍스트 -->
-        <span class="blind">HealthKeeper 공지사항</span>
+        <span class="blind">공지사항</span>
         HealthKeeper 공지사항 <!-- 텍스트 내용 -->
     </p> 
 </div>

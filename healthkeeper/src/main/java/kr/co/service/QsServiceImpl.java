@@ -35,8 +35,8 @@ public class QsServiceImpl implements QsService{
 	
 	// 게시판 글 총 갯수
 	@Override
-	public int getTotal() {
-		return mapper.getTotal();
+	public int getTotal(QsCriteria qcri) {
+		return mapper.getTotal(qcri);
 	}
 
 	// 게시판 조회

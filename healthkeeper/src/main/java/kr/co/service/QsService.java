@@ -17,7 +17,7 @@ public interface QsService {
 	public List<QsVO> getlistPaging(QsCriteria qcri);
 	
 	// 게시판 총 갯수
-	public int getTotal();
+	public int getTotal(QsCriteria qcri);
 	
 	// 게시판 조회
 	public QsVO getpage(int QS_BNO);
