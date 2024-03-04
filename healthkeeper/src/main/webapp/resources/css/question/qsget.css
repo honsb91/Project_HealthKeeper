@@ -90,3 +90,27 @@ hr {
         padding: 0 10px;
     }
 }
+
+ /* 댓글 리스트 스타일 */
+    #reply {
+        margin-top: 20px !important;
+    }
+
+    .replyList {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .replyList li {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .replyList li p {
+        margin: 0;
+    }
+
+    .replyList li p:first-child {
+        font-weight: bold;
+    }

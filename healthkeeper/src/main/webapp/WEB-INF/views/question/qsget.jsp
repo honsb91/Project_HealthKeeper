@@ -40,12 +40,47 @@
         	${file.FILE_NAME}</a>(${file.FILE_SIZE} KB)<br>
     	</c:forEach>
 	</div>
+	
+	<!-- 댓글 -->
+	<div id="reply">
+		<ol class="replyList">
+			<c:forEach items="${replyList}" var="replyList">
+				<li>
+					<p>
+					${replyList.QRNO}.
+					작성자 : ${replyList.WRITER}<br />
+					작성날짜 : <fmt:formatDate value="${replyList.REGDATE}" pattern="yyyy-MM-dd"/>
+					</p>
+					<p>${replyList.CONTENT}</p>
+				</li>
+			</c:forEach>
+		</ol>
+	</div>
+	
+	<form name="replyForm" method="post">
+  		<input type="hidden" id="QS_BNO" name="QS_BNO" value="${pageInfo.QS_BNO}" />
+  		<input type="hidden" id="pageNum" name="pageNum" value="${qcri.pageNum}"> 
+  		<input type="hidden" id="amount" name="amount" value="${qcri.amount}"> 
+  		<input type="hidden" id="keyword" name="keyword" value="${qcri.keyword}"> 
+  		<input type="hidden" id="type" name="type" value="${qcri.type}"> 
+
+  	<div>
+    	<label for="writer">댓글 작성자</label><input type="text" id="WRITER" name="WRITER" />
+    <br/>
+    	<label for="content">댓글 내용</label><input type="text" id="CONTENT" name="CONTENT" />
+  	</div>
+  	<div>
+ 	 	<button type="button" class="replyWriteBtn">작성</button>
+  	</div>
+	</form>
 	<hr>
 
 	<div class="btn_wrap">
 		<a class="btn" id="qslist_btn">목록 페이지</a> 
 		<a class="btn" id="qsupdate_btn">수정 하기</a>
 	</div>
+	
+
 	<form id="qsinfoForm" action="/question/qsupdate" method="get">
 		<input type="hidden" id="QS_BNO" name="QS_BNO" value='<c:out value="${pageInfo.QS_BNO}"/>'>
 		<input type="hidden" name="pageNum" value='<c:out value="${qcri.pageNum}"/>'>
@@ -74,6 +109,13 @@
         var url = "/notice/fileDown?FILE_ID=" + fileId;
         window.location.href = url;
     }
+	
+	// 댓글작성 js코드
+	$(".replyWriteBtn").on("click", function(){
+		  var formObj = $("form[name='replyForm']");
+		  formObj.attr("action", "/question/replyRegistr");
+		  formObj.submit();
+		});
 </script>	
 </body>
 </html>

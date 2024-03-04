@@ -57,4 +57,10 @@ public class QsServiceImpl implements QsService{
 		return mapper.delete(QS_BNO);
 	}
 
+	// 게시판 조회수
+	@Override
+	public int qsViews(int QS_BNO) {
+		return mapper.qsViews(QS_BNO);
+	}
+
 }

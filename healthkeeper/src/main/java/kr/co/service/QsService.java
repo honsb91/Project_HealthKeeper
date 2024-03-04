@@ -27,5 +27,8 @@ public interface QsService {
 	
 	// 게시판 삭제
 	public int delete(int QS_BNO);
+	
+	// 게시판 조회수
+	public int qsViews(int QS_BNO);
 
 }

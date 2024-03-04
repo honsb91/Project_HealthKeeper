@@ -22,10 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시판 목록(페이징 유지처리) -->
 	<select id="getlistPaging" resultType="kr.co.model.QsVO">
     <![CDATA[
-        SELECT QS_BNO, QS_TITLE, QS_CONTENT, QS_WRITER, QS_REGDATE
+        SELECT QS_BNO, QS_TITLE, QS_CONTENT, QS_WRITER, QS_REGDATE, QS_VIEWS
         FROM(        
               SELECT /*+INDEX_DESC(QUESTION PK_QUESTION) */ 
-              ROWNUM AS RN, QS_BNO, QS_TITLE, QS_CONTENT, QS_WRITER, QS_REGDATE
+              ROWNUM AS RN, QS_BNO, QS_TITLE, QS_CONTENT, QS_WRITER, QS_REGDATE, QS_VIEWS
               FROM QUESTION 
               WHERE ROWNUM <= #{pageNum} * #{amount}
     	]]>
@@ -72,6 +72,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM QUESTION
 		WHERE QS_BNO = #{QS_BNO}
 	</select>
+	
+	<!-- 게시판 조회수 -->
+	<update id="qsViews">
+		UPDATE QUESTION
+		SET
+		QS_VIEWS = QS_VIEWS + 1
+		WHERE QS_BNO = #{QS_BNO}
+	</update>
 	
 	<!-- 게시판 수정 -->
 	<update id="update">
