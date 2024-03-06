@@ -21,5 +21,7 @@ public class QsReplyVO {
 	
 	// 댓글 작성일자
 	private Date REGDATE;
+	
 
+	
 }

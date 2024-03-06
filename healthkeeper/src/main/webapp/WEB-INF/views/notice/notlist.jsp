@@ -20,7 +20,7 @@
     <p class="nh_title">
         <!-- 스크린 리더를 위한 감춰진 텍스트 -->
         <span class="blind">공지사항</span>
-        HealthKeeper 공지사항 <!-- 텍스트 내용 -->
+        공지사항 <!-- 텍스트 내용 -->
     </p> 
 </div>
 

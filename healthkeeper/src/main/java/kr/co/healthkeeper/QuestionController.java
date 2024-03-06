@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.model.QsCriteria;
@@ -117,7 +118,7 @@ public class QuestionController {
 	
 	// 질문게시판 댓글수정 페이지 진입
 	@GetMapping("/replyupdate")
-	public void replyUpdateGET(QsReplyVO replyvo, QsCriteria qcri, Model model) {
+	public void replyUpdateGET(QsCriteria qcri, Model model, QsReplyVO replyvo){
 		
 		model.addAttribute("replyupdate", replyservice.selectReply(replyvo.getQRNO()));
 		model.addAttribute("qcri", qcri);
@@ -126,40 +127,54 @@ public class QuestionController {
 	
 	// 질문게시판 댓글수정
 	@PostMapping("/replyupdate")
-	public String replyUpdatePOST(QsReplyVO replyvo, QsCriteria qcri, RedirectAttributes rttr) {
+	public String replyUpdatePOST(QsReplyVO replyvo, QsCriteria qcri, RedirectAttributes rttr,
+	                              @RequestParam(value = "QRNO", required = false) Integer qrno) {
+
+	    log.info("reply update");
+
+	    // QRNO가 null이거나 비어 있는지 확인
+	    if (qrno == null) {
+	        // 필요한 매개변수가 누락된 경우 에러 처리
+	        return "errorPage";
+	    }
+
+	    replyvo.setQRNO(qrno);
+
+	    replyservice.updateReply(replyvo);
+
+	    rttr.addAttribute("QS_BNO", replyvo.getQS_BNO());
+	    rttr.addAttribute("QRNO", qrno);
+	    rttr.addAttribute("pageNum", qcri.getPageNum());
+	    rttr.addAttribute("amount", qcri.getAmount());
+	    rttr.addAttribute("keyword", qcri.getKeyword());
+	    rttr.addAttribute("type", qcri.getType());
+
+	    return "redirect:/question/qsget";
+	}
+	
+	// 질문게시판 댓글삭제 페이지 진입
+	@GetMapping("/replydelete")
+	public void replyDeleteGET(QsCriteria qcri, Model model, int QS_BNO){
+			
+		model.addAttribute("replydelete", replyservice.selectReply(QS_BNO));
+		model.addAttribute("qcri", qcri);
+			
+	}
+	
+	
+	// 질문게시판 댓글삭제
+	@PostMapping("/replydelete")
+	public String replyDeletePOST(@RequestParam int QRNO, QsReplyVO replyvo, QsCriteria qcri, RedirectAttributes rttr) {
 		
-		replyservice.updateReply(replyvo);
+		replyservice.deleteReply(QRNO);
 		
 		rttr.addAttribute("QS_BNO", replyvo.getQS_BNO());
+		rttr.addAttribute("QRNO", replyvo.getQRNO());
 		rttr.addAttribute("pageNum", qcri.getPageNum());
 		rttr.addAttribute("amount", qcri.getAmount());
 		rttr.addAttribute("keyword", qcri.getKeyword());
 		rttr.addAttribute("type", qcri.getType());
 		
 		return "redirect:/question/qsget";
-	}
-	
-	// 질문게시판 댓글삭제 페이지 진입
-	@GetMapping("/replydelete")
-	public void replyDeleteGET(QsReplyVO replyvo, QsCriteria qcri, Model model) {
-		
-		model.addAttribute("replydelete", replyservice.selectReply(replyvo.getQRNO()));
-		model.addAttribute("qcri", qcri);
-		
-	}
-	
-	// 질문게시판 댓글삭제
-	@PostMapping("/replydelete")
-	public String replyDeletePOST(QsReplyVO replyvo, QsCriteria qcri, RedirectAttributes rttr) {
-		
-		replyservice.deleteReply(replyvo);
-		
-		rttr.addAttribute("QS_BNO", replyvo.getQS_BNO());
-		rttr.addAttribute("pageNum", qcri.getPageNum());
-		rttr.addAttribute("amount", qcri.getAmount());
-		rttr.addAttribute("keyword", qcri.getKeyword());
-		rttr.addAttribute("type", qcri.getType());
-		
-		return "redirect:/question/gsget";
 	}
 }

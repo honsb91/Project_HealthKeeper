@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.mapper.QsReplyMapper;
 import kr.co.model.QsReplyVO;
@@ -28,19 +29,19 @@ public class QsReplyServiceImpl implements QsReplyService{
 
 	// 질문게시판 댓글수정
 	@Override
-	public void updateReply(QsReplyVO replyvo) {
-		mapper.updateReply(replyvo);
+	public int updateReply(QsReplyVO replyvo){
+		return mapper.updateReply(replyvo);
 	}
 
 	// 질문게시판 댓글삭제
 	@Override
-	public void deleteReply(QsReplyVO replyvo) {
-		mapper.deleteReply(replyvo);
+	public int deleteReply(@RequestParam int QRNO){
+		return mapper.deleteReply(QRNO);
 	}
 
 	// 질문게시판 선택된 댓글조회
 	@Override
-	public QsReplyVO selectReply(int QRNO) {
+	public QsReplyVO selectReply(int QRNO){
 		return mapper.selectReply(QRNO);
 	}
 

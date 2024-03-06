@@ -5,8 +5,8 @@
 <mapper namespace="kr.co.mapper.QsReplyMapper">
 
 	<!-- 댓글 조회 -->
-	<select id="readReply" resultType="kr.co.model.QsReplyVO">
-		SELECT QRNO,CONTENT,WRITER,REGDATE
+	<select id="readReply" parameterType="int" resultType="kr.co.model.QsReplyVO">
+		SELECT QS_BNO,QRNO,CONTENT,WRITER,REGDATE
 		FROM QS_REPLY
 		WHERE QS_BNO = #{QS_BNO}
 	</select>
@@ -18,7 +18,7 @@
 	</insert>
 	
 	<!-- 댓글 수정 -->
-	<update id="updateReply" parameterType="kr.co.model.QsReplyVO">
+	<update id="updateReply">
 		UPDATE QS_REPLY 
 		SET
 		CONTENT = #{CONTENT}
