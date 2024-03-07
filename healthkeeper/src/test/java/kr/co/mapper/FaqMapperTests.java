@@ -1,5 +1,7 @@
 package kr.co.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -14,7 +16,7 @@ import kr.co.model.FaqVO;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class FaqMapperTests {
 	
-	private static final Logger log = LoggerFactory.getLogger(NoticeMapperTests.class);
+	private static final Logger log = LoggerFactory.getLogger(FaqMapperTests.class);
 	
 	@Autowired
 	private FaqMapper mapper;
@@ -31,5 +33,16 @@ public class FaqMapperTests {
 //		
 //		mapper.faqregistr(vo);
 //	}
+	
+	// FAQ 게시판 목록테스트
+	@Test
+	public void faqlist() {
+		
+		List list = mapper.faqlist();
+		
+		for(int i=0; i<list.size(); i++) {
+			log.info("" + list.get(i));
+		}
+	}
 
 }

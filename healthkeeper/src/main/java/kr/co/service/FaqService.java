@@ -1,10 +1,15 @@
 package kr.co.service;
 
+import java.util.List;
+
 import kr.co.model.FaqVO;
 
 public interface FaqService {
 	
-	// faq 게시판 등록
+	// FAQ 게시판 등록
 	public void faqregistr(FaqVO faqvo);
+	
+	// FAQ 게시판 목록
+	public List<FaqVO> faqlist();
 
 }

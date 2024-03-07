@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- FAQ 게시판 목록 -->
-	<select id="faqList" resultType="kr.co.model.FaqVO">
+	<select id="faqlist" resultType="kr.co.model.FaqVO">
 		SELECT * FROM FAQ
 	</select>
 </mapper>
