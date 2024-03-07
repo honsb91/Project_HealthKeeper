@@ -13,9 +13,9 @@
 	
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"></property>	
-		<property name="username" value="c##honsb"></property>
-		<property name="password" value="009914"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@118.40.91.135:1521:xe"></property>	
+		<property name="username" value="ATEAM"></property>
+		<property name="password" value="ATEAM1"></property>
 	</bean> 
  
 	<bean id="datasource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close"> 

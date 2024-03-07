@@ -24,23 +24,10 @@
                             <li class="nav-item"><a class="nav-link" href="<c:url value='/question/qslist'/>">질문게시판</a></li>
                             <li class="nav-item"><a class="nav-link" href="contact.html">통계</a></li>
                             <li class="nav-item"><a class="nav-link" href="<c:url value='/notice/notlist'/>">공지사항</a></li>
-                            <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">로그인</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="<c:url value='/patient/login'/>">환자 로그인</a></li>
-                                    <li><a class="dropdown-item" href="blog-post.html">보호자 로그인</a></li>
-                                    <li><a class="dropdown-item" href="blog-post.html">관리자 로그인</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">회원가입</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                                    <li><a class="dropdown-item" href="portfolio-overview.html">환자 회원가입</a></li>
-                                    <li><a class="dropdown-item" href="portfolio-item.html">보호자 회원가입</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                            <li class="nav-item"><a class="nav-link" href="<c:url value='/faq/faqlist'/>">FAQ</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<c:url value='/member/login'/>">로그인</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<c:url value='/member/join'/>">회원가입</a></li>
+                         </ul>
                     </div>
                 </div>
             </nav>

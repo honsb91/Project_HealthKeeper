@@ -118,7 +118,7 @@ public class QuestionController {
 	
 	// 질문게시판 댓글수정 페이지 진입
 	@GetMapping("/replyupdate")
-	public void replyUpdateGET(QsCriteria qcri, Model model, QsReplyVO replyvo){
+	public void replyUpdateGET(QsCriteria qcri, Model model,QsReplyVO replyvo){
 		
 		model.addAttribute("replyupdate", replyservice.selectReply(replyvo.getQRNO()));
 		model.addAttribute("qcri", qcri);
@@ -127,29 +127,21 @@ public class QuestionController {
 	
 	// 질문게시판 댓글수정
 	@PostMapping("/replyupdate")
-	public String replyUpdatePOST(QsReplyVO replyvo, QsCriteria qcri, RedirectAttributes rttr,
-	                              @RequestParam(value = "QRNO", required = false) Integer qrno) {
-
-	    log.info("reply update");
-
-	    // QRNO가 null이거나 비어 있는지 확인
-	    if (qrno == null) {
-	        // 필요한 매개변수가 누락된 경우 에러 처리
-	        return "errorPage";
-	    }
-
-	    replyvo.setQRNO(qrno);
-
-	    replyservice.updateReply(replyvo);
-
-	    rttr.addAttribute("QS_BNO", replyvo.getQS_BNO());
-	    rttr.addAttribute("QRNO", qrno);
-	    rttr.addAttribute("pageNum", qcri.getPageNum());
-	    rttr.addAttribute("amount", qcri.getAmount());
-	    rttr.addAttribute("keyword", qcri.getKeyword());
-	    rttr.addAttribute("type", qcri.getType());
-
-	    return "redirect:/question/qsget";
+	public String replyUpdatePOST(QsReplyVO replyvo, QsCriteria qcri, RedirectAttributes rttr){
+		
+		log.info("reply update");
+		
+		replyservice.updateReply(replyvo);
+		
+		rttr.addAttribute("QS_BNO", replyvo.getQS_BNO());
+		rttr.addAttribute("QRNO", replyvo.getQRNO());
+		rttr.addAttribute("pageNum", qcri.getPageNum());
+		rttr.addAttribute("amount", qcri.getAmount());
+		rttr.addAttribute("keyword", qcri.getKeyword());
+		rttr.addAttribute("type", qcri.getType());
+		
+		return "redirect:/question/qsget";
+		
 	}
 	
 	// 질문게시판 댓글삭제 페이지 진입

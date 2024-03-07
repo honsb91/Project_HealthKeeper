@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.FaqMapper">
+
+	<!-- FAQ 게시판등록 -->
+	<insert id="faqregistr" parameterType="kr.co.model.FaqVO">
+    	INSERT INTO FAQ (FAQ_ID, TITLE, CONTENT, MEMBER_ID)
+    	VALUES (#{FAQ_ID}, #{TITLE}, #{CONTENT}, #{member.MEMBER_ID})
+	</insert>
+	
+	<!-- FAQ 게시판 목록 -->
+	<select id="faqList" resultType="kr.co.model.FaqVO">
+		SELECT * FROM FAQ
+	</select>
+</mapper>

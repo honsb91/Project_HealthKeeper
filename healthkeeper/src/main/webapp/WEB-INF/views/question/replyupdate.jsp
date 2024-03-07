@@ -42,8 +42,7 @@
         </section>
         <hr />
     </div>
-</body>
-<script>
+    <script>
     $(document).ready(function(){
         var formObj = $("form[name='updateForm']");
         
@@ -62,4 +61,5 @@
         });
     });
 </script>
+</body>
 </html>
