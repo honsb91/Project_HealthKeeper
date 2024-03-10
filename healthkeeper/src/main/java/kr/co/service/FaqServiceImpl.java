@@ -26,4 +26,12 @@ public class FaqServiceImpl implements FaqService{
 		return mapper.faqlist();
 	}
 
+	
+	// FAQ 게시판 수정
+	@Override
+	public int faqupdate(FaqVO faqvo) {
+		return mapper.faqupdate(faqvo);
+	}
+
+
 }

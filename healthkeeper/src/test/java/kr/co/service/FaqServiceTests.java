@@ -36,13 +36,34 @@ public class FaqServiceTests {
 //	 }
 	 
 	 // FAQ 게시판 목록테스트
-	 @Test
-	 public void faqlist() {
-		 
-		 List list = service.faqlist();
-		 for(int i=0; i<list.size(); i++) {
-				log.info("" + list.get(i));
-			}
-	 }
+//	 @Test
+//	 public void faqlist() {
+//		 
+//		 List list = service.faqlist();
+//		 for(int i=0; i<list.size(); i++) {
+//				log.info("" + list.get(i));
+//			}
+//	 }
+	 // FAQ 게시판 수정테스트
+//	 @Test
+//	 public void faqupdate() {
+//		 
+//		 FaqVO vo = new FaqVO();
+//		 
+//		 vo.setFAQ_ID(10);
+//		 vo.setTITLE("service Test");
+//		 vo.setCONTENT("service Test중입니다.");
+//		 
+//		 int result = service.faqupdate(vo);
+//		 log.info("result :" + result);
+//	 }
+	 
+	 // FAQ 게시판 조회테스트
+//	 @Test
+//	 public void faqpage() {
+//		 
+//		 int FAQ_ID = 10;
+//		 log.info("" + service.faqpage(FAQ_ID));
+//	 }
 
 }
