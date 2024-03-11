@@ -7,6 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/resources/css/member/join.css">
 </head>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -16,11 +19,125 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="text-center">회원가입</h2>
-                    </div>
+    					<ul class="nav nav-tabs card-header-tabs">
+        					<li class="nav-item">
+            					<a class="nav-link active patient-tab" id="patient-tab" data-bs-toggle="tab" 
+            					   href="#patient_registration" role="tab" aria-controls="patient_registration" 
+            					   aria-selected="true">환자 회원가입</a>
+        					</li>
+        					<li class="nav-item">
+            					<a class="nav-link guardian-tab" id="guardian-tab" data-bs-toggle="tab" 
+            					   href="#guardian_registration" role="tab" aria-controls="guardian_registration" 
+            					   aria-selected="false">보호자 회원가입</a>
+        					</li>
+    					</ul>
+					</div>
                     <div class="card-body">
-                        <form id="patient_join_form" method="post">
-                            <div class="form-group">
+                    	<div class="tab-content">
+                    		<div class="tab-pane fade show active" id="patient_registration" role="tabpanel" 
+                    		     aria-labelledby="patient-tab">
+                    		    <!-- 환자 회원가입 -->
+                         		<form id="patient_join_form" method="post">
+                            		<div class="form-group">
+    									<label for="email_input">아이디</label>
+    									<div class="input-group">
+                  						<input type="email" name="EMAIL" id="patient_email" class="form-control" placeholder="아이디">
+        									<div class="input-group-append">
+            									<button class="btn btn-outline-secondary" type="button" onclick="checkDuplicate()">중복 확인</button>
+        									</div>
+    									</div>
+									</div>
+									
+                            		<div class="form-group">
+                                		<label for="password_input">비밀번호</label>
+                                		<input type="password" name="PW" id="patient_pw" class="form-control" placeholder="비밀번호">
+                            		</div>
+                            		
+                            		<div class="form-group">
+                                		<label for="password_confirm_input">비밀번호 확인</label>
+                                		<input type="password" name="PW_CHK" id="patient_pw_chk" class="form-control" placeholder="비밀번호 확인">
+                            		</div>
+                            		
+                            		<div class="form-group">
+                                		<label for="name_input">이름</label>
+                                		<input type="text" name="NAME" id="patient_name" class="form-control" placeholder="이름">
+                            		</div>
+                            		
+                            		<div class="form-group">
+                                		<label for="phone_input">전화번호</label>
+                                		<input type="text" name="PHONE" id="patient_phone" class="form-control" placeholder="전화번호">
+                            		</div>
+                            		
+                            		<div class="form-group">
+                                		<label for="birth_input">생년월일</label>
+                                		<input type="date" name="BIRTH" id="patient_birth" class="form-control" placeholder="생년월일">
+                            		</div>
+                            		
+                            		<div class="form-group">
+    									<input type="hidden" id="social" name="SOCIAL" value="x">
+									</div>
+									
+									<div class="form-group">
+    									<input type="hidden" id="alarm" name="ALARM" value="y">
+									</div>
+									
+                            		<div class="form-group">
+                                		<label>주소</label>
+                                	<div class="input-group mb-3">
+                                    	<input type="text" name="ADDRESS" class="form-control" readonly="readonly" placeholder="주소">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button" onclick="execution_daum_address()">주소찾기</button>
+                                    </div>
+                                	</div>
+                                		<input type="text" name="ADDRESS_DETAIL" class="form-control" readonly="readonly" placeholder="나머지주소">
+                            		</div>
+                            		
+                            		<div class="form-group">
+    									<label>성별</label>
+    								<div class="form-check form-check-inline">
+        								<input class="form-check-input" type="radio" name="GENDER" id="femaleGender" value="남">
+        								<label class="form-check-label" for="femaleGender">남</label>
+    								</div>
+    								<div class="form-check form-check-inline">
+        								<input class="form-check-input" type="radio" name="GENDER" id="maleGender" value="여">
+        								<label class="form-check-label" for="maleGender">여</label>
+    								</div>
+									</div>
+
+									<div class="form-group">
+    									<label>혈액형</label>
+    								<div class="form-check form-check-inline">
+        								<input class="form-check-input" type="radio" name="BLOOD" id="bloodTypeA" value="A">
+        								<label class="form-check-label" for="bloodTypeA">A</label>
+    								</div>
+    								<div class="form-check form-check-inline">
+        								<input class="form-check-input" type="radio" name="BLOOD" id="bloodTypeB" value="B">
+        								<label class="form-check-label" for="bloodTypeB">B</label>
+    								</div>
+    								<div class="form-check form-check-inline">
+        								<input class="form-check-input" type="radio" name="BLOOD" id="bloodTypeO" value="O">
+        								<label class="form-check-label" for="bloodTypeO">O</label>
+    								</div>
+    								<div class="form-check form-check-inline">
+        								<input class="form-check-input" type="radio" name="BLOOD" id="bloodTypeAB" value="AB">
+        								<label class="form-check-label" for="bloodTypeAB">AB</label>
+    								</div>
+									</div>
+									
+    								<div class="form-group">
+    									<input type="hidden" id="role" name="ROLE" value="m">
+									</div>
+									
+                            		<div class="text-center">
+                                		<button type="submit" name="join_button" class="btn btn-primary btn-lg">회원가입</button>
+                            		</div>
+                        			</form>
+                        		</div>
+                        		
+                        <!-- 보호자 회원가입 -->
+                        <div class="tab-pane fade" id="guardian_registration" role="tabpanel" aria-labelledby="guardian-tab">
+                        <form id="guardian_join_form" method="post">
+                        <div class="form-group">
     <label for="email_input">아이디</label>
     <div class="input-group">
         <input type="email" name="EMAIL" id="email_input" class="form-control" placeholder="아이디">
@@ -65,6 +182,7 @@
                                 </div>
                                 <input type="text" name="ADDRESS_DETAIL" class="form-control" readonly="readonly" placeholder="나머지주소">
                             </div>
+                            
                             <div class="form-group">
     <label>성별</label>
     <div class="form-check form-check-inline">
@@ -76,33 +194,12 @@
         <label class="form-check-label" for="maleGender">여</label>
     </div>
 </div>
-
-<div class="form-group">
-    <label>혈액형</label>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="BLOOD" id="bloodTypeA" value="A">
-        <label class="form-check-label" for="bloodTypeA">A</label>
-    </div>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="BLOOD" id="bloodTypeB" value="B">
-        <label class="form-check-label" for="bloodTypeB">B</label>
-    </div>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="BLOOD" id="bloodTypeO" value="O">
-        <label class="form-check-label" for="bloodTypeO">O</label>
-    </div>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="BLOOD" id="bloodTypeAB" value="AB">
-        <label class="form-check-label" for="bloodTypeAB">AB</label>
-    </div>
-    <div class="form-group">
-    							<input type="hidden" id="role" name="ROLE" value="x">
-							</div>
-</div>
                             <div class="text-center">
                                 <button type="submit" name="join_button" class="btn btn-primary btn-lg">회원가입</button>
                             </div>
                         </form>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -188,8 +285,21 @@ function checkDuplicate() {
 $(document).ready(function(){
     // Change form action and submit for email-based login
     $("#login_button").click(function(){
-        $("#login_form").attr("action", "/member/join"); // Adjust action URL for email-based login
-        $("#login_form").submit();
+        $("#patient_join_form").attr("action", "/member/join"); // Adjust action URL for email-based login
+        $("#patient_join_form").submit();
+    });
+});
+
+
+$(document).ready(function(){
+    $('#patient-tab').on('click', function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#guardian-tab').on('click', function (e) {
+        e.preventDefault();
+        $(this).tab('show');
     });
 });
 </script>

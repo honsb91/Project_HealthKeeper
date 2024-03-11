@@ -65,3 +65,28 @@ form {
 .form-check-label {
     margin-bottom: 0 !important;
 }
+
+/* 카드 헤더 */
+.card-header {
+    text-align: center !important;
+    padding: 20px !important;
+}
+
+/* 탭 링크 */
+.nav-tabs .nav-item {
+    flex: 1 !important;
+}
+
+.nav-tabs .nav-link {
+    color: #c8cfd6 !important;
+    font-family: Arial, sans-serif;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    text-align: center !important;
+}
+
+/* 활성화된 탭 링크 */
+.nav-tabs .nav-link.active {
+    background-color: #373c41 !important;
+}
