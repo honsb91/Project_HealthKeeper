@@ -2198,7 +2198,7 @@ textarea.form-control-lg {
 }
 .form-check .form-check-input {
   float: left;
-  margin-left: -1.5em;
+  margin-left: -0.5em;
 }
 
 .form-check-reverse {
@@ -4166,6 +4166,7 @@ textarea.form-control-lg {
   background-clip: border-box;
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
   border-radius: var(--bs-card-border-radius);
+  margin-bottom: 5%;
 }
 .card > hr {
   margin-right: 0;

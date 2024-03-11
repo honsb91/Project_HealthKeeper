@@ -1,6 +1,5 @@
 package kr.co.model;
 
-import java.util.Date;
 
 import lombok.Data;
 
@@ -23,7 +22,7 @@ public class MemberVO {
     private String PHONE;
     
     // 회원 생년월일
-    private Date BIRTH;
+    private String BIRTH;
     
     // 회원 성별
     private String GENDER;

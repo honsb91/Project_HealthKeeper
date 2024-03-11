@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.MemberMapper">
+
+	<insert id="memberjoin" parameterType="kr.co.model.MemberVO">
+		INSERT INTO MEMBER 
+		(EMAIL,PW,NAME,
+		 PHONE,BIRTH,GENDER,BLOOD,SOCIAL,
+		 ADDRESS,ADDRESS_DETAIL,ALARM,ROLE)
+		VALUES 
+		(#{EMAIL},#{PW},#{NAME},
+		#{PHONE},#{BIRTH},#{GENDER},#{BLOOD},#{SOCIAL},
+		#{ADDRESS},#{ADDRESS_DETAIL},#{ALARM},#{ROLE})
+	</insert>
+
+</mapper>

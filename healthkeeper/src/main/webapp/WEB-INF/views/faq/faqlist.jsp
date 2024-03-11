@@ -21,9 +21,10 @@
             <c:forEach items="${faqlist}" var="faq">
                 <li class="qna-item">
                     <div class="question-article">
+                        <input type="text" id="title_${faq.FAQ_ID}" value="<c:out value='${faq.TITLE}'/>" style="display: none;">
                         <a href="#" class="question btn-fold">
                             <strong class="blind">질문:</strong>
-                            <span class="q">Q</span><c:out value="${faq.TITLE}"/>
+                            <span class="q">Q</span><span id="titleText_${faq.FAQ_ID}"><c:out value="${faq.TITLE}"/></span>
                         </a>
                     </div>
                     <div class="answer-article">
@@ -35,9 +36,9 @@
                             <input type="hidden" name="FAQ_ID" value="${faq.FAQ_ID}"/>
                             <textarea name="editedContent"></textarea>
                             <button type="submit">저장</button>
+                            <button type="button" onclick="cancelEdit('${faq.FAQ_ID}')">취소</button>
                         </form>
-                        <button onclick="editAnswer('${faq.FAQ_ID}')">수정</button>
-                        <button onclick="cancelEdit('${faq.FAQ_ID}')">취소</button>
+                        <button onclick="editItem('${faq.FAQ_ID}')">수정</button>
                     </div>
                 </li>
             </c:forEach>
@@ -61,7 +62,10 @@ $(function() {
     });
 });
 
-function editAnswer(faqId) {
+function editItem(faqId) {
+    var titleInput = document.getElementById("title_" + faqId);
+    var titleText = document.getElementById("titleText_" + faqId);
+    var titleLink = titleText.parentNode.querySelector('.btn-fold');
     var answerCnt = document.getElementById("answer-cnt_" + faqId);
     var editForm = document.getElementById("editForm_" + faqId);
     var currentContent = answerCnt.innerText.trim();
@@ -72,15 +76,29 @@ function editAnswer(faqId) {
     // Hide answer content, display edit form
     answerCnt.style.display = "none";
     editForm.style.display = "block";
+
+    // Hide original title text and link
+    titleText.style.display = "none";
+    titleLink.style.display = "none";
+
+    // Show title input for editing
+    titleInput.style.display = "block";
 }
 
 function cancelEdit(faqId) {
+    var titleInput = document.getElementById("title_" + faqId);
+    var titleText = document.getElementById("titleText_" + faqId);
+    var titleLink = titleText.parentNode.querySelector('.btn-fold');
     var answerCnt = document.getElementById("answer-cnt_" + faqId);
     var editForm = document.getElementById("editForm_" + faqId);
 
     // Hide edit form, display answer content
     answerCnt.style.display = "block";
     editForm.style.display = "none";
+
+    // Show original title
+    titleInput.style.display = "block";
+    titleLink.style.display = "inline";
 }
 </script>
 </body>
