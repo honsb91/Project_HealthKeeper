@@ -29,6 +29,29 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
 	
+	// 회원가입 페이지 이동 코드
+	@GetMapping("/join")
+	public void memberjoinGET() {
+		log.info("회원가입 페이지 진입");
+	}
+		
+	// 회원가입
+	@PostMapping("/join")
+	public String memberjoinPOST(MemberVO member) throws Exception {
+			
+		String rawPw = "";            // 인코딩 전 비밀번호
+	    String encodePw = "";        // 인코딩 후 비밀번호
+	        
+	    rawPw = member.getPW();          // 비밀번호 데이터 얻음
+	    encodePw = pwEncoder.encode(rawPw);        // 비밀번호 인코딩
+	    member.setPW(encodePw);            // 인코딩된 비밀번호 member객체에 다시 저장
+	        
+	    /* 회원가입 쿼리 실행 */
+	    memberService.memberjoin(member);
+			
+	    return "redirect:/main";
+	}
+	
 	// 로그인 페이지 이동코드
 	@GetMapping("/login")
 	public void memberloginGET(){
@@ -68,27 +91,14 @@ public class MemberController {
 		}
 	}
 	
-	// 회원가입 페이지 이동 코드
-	@GetMapping("/join")
-	public void memberjoinGET() {
-		log.info("회원가입 페이지 진입");
-	}
-	
-	// 회원가입
-	@PostMapping("/join")
-	public String memberjoinPOST(MemberVO member) throws Exception {
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logoutGET(HttpServletRequest request) throws Exception {
+		log.info("로그아웃 메서드 진입");
 		
-		String rawPw = "";            // 인코딩 전 비밀번호
-        String encodePw = "";        // 인코딩 후 비밀번호
-        
-        rawPw = member.getPW();          // 비밀번호 데이터 얻음
-        encodePw = pwEncoder.encode(rawPw);        // 비밀번호 인코딩
-        member.setPW(encodePw);            // 인코딩된 비밀번호 member객체에 다시 저장
-        
-        /* 회원가입 쿼리 실행 */
-        memberService.memberjoin(member);
+		HttpSession session = request.getSession();
+		session.invalidate(); // 세션 전체를 무효화하는 메서드, 세션 제거
 		
 		return "redirect:/main";
 	}
-	
 }

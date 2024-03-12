@@ -5,18 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/resources/css/main.css">
-<!-- navbar drop 메뉴 해주는 js -->
-<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,11 +35,24 @@
     							<li class="nav-item"><a class="nav-link" href="contact.html">통계</a></li>
     							<li class="nav-item"><a class="nav-link" href="<c:url value='/notice/notlist'/>">공지사항</a></li>
     							<li class="nav-item"><a class="nav-link" href="<c:url value='/faq/faqlist'/>">FAQ</a></li>
-    							<li class="nav-item"><span class="nav-link">[ ${member.NAME}님 반갑습니다. ]</span></li>
+    							<li class="nav-item dropdown">
+    								<span class="nav-link dropdown-toggle" id="navbarDropdown" role="button" 
+    									  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        								  [ ${member.NAME}님 반갑습니다. ]
+    								</span>
+    							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        							<a class="dropdown-item" href="/member/logout" onclick="logout()">로그아웃</a>
+    							</div>
+								</li>
 							</c:if>
                          </ul>
                     </div>
                 </div>
             </nav>
+<script>
+$(document).ready(function(){
+    $('.dropdown-toggle').dropdown();
+});
+</script>
 </body>
 </html>
