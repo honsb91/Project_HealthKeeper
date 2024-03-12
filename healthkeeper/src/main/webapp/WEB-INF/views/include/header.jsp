@@ -41,7 +41,7 @@
         								  [ ${member.NAME}님 반갑습니다. ]
     								</span>
     							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        							<a class="dropdown-item" href="/member/logout" onclick="logout()">로그아웃</a>
+        							<a class="dropdown-item" href="/member/logout" onclick="logout(event)">로그아웃</a>
     							</div>
 								</li>
 							</c:if>
@@ -50,9 +50,20 @@
                 </div>
             </nav>
 <script>
-$(document).ready(function(){
-    $('.dropdown-toggle').dropdown();
-});
+
+	// 드롭바 js코드
+	$(document).ready(function(){
+    	$('.dropdown-toggle').dropdown();
+	});
+	
+	// 로그아웃 모달창 js 코드
+	function logout(event) {
+        event.preventDefault(); // 링크의 기본 동작을 막음
+
+        if (confirm("${member.NAME}님 로그아웃 하시겠습니까?")) {
+            window.location.href = event.target.getAttribute('href'); // 로그아웃 링크로 이동
+        }
+    }
 </script>
 </body>
 </html>
