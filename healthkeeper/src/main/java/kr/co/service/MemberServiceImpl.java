@@ -18,4 +18,10 @@ public class MemberServiceImpl implements MemberService{
 		mapper.memberjoin(member);
 	}
 
+	// 로그인
+	@Override
+	public MemberVO memberlogin(MemberVO member) throws Exception {
+		return mapper.memberlogin(member);
+	}
+
 }

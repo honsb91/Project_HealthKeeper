@@ -44,4 +44,16 @@ public class MemberServiceTests {
 //		service.memberjoin(member);
 //	}
 
+	// 로그인 테스트
+	@Test
+	public void login() throws Exception{
+		MemberVO vo = new MemberVO();
+		
+		vo.setEMAIL("bb@bb.com");
+		vo.setPW("1");
+		
+		service.memberlogin(vo);
+		System.out.println("결과 값 : " + service.memberlogin(vo));
+		
+	}
 }

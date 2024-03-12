@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/resources/css/main.css">
 <!-- navbar drop 메뉴 해주는 js -->
 <!-- Bootstrap core JS-->
@@ -21,12 +25,24 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="<c:url value='/question/qslist'/>">질문게시판</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">통계</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<c:url value='/notice/notlist'/>">공지사항</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<c:url value='/faq/faqlist'/>">FAQ</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<c:url value='/member/login'/>">로그인</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<c:url value='/member/join'/>">회원가입</a></li>
+                         <!-- 로그인 하지 않은 상태 -->
+                            <c:if test="${ member == null }">
+                            	<li class="nav-item"><a class="nav-link" href="<c:url value='/question/qslist'/>">질문게시판</a></li>
+                            	<li class="nav-item"><a class="nav-link" href="contact.html">통계</a></li>
+                            	<li class="nav-item"><a class="nav-link" href="<c:url value='/notice/notlist'/>">공지사항</a></li>
+                            	<li class="nav-item"><a class="nav-link" href="<c:url value='/faq/faqlist'/>">FAQ</a></li>
+                            	<li class="nav-item"><a class="nav-link" href="<c:url value='/member/login'/>">로그인</a></li>
+                            	<li class="nav-item"><a class="nav-link" href="<c:url value='/member/join'/>">회원가입</a></li>
+                            </c:if>
+                            
+                         <!-- 로그인한 상태 -->
+							<c:if test="${member != null }">
+    							<li class="nav-item"><a class="nav-link" href="<c:url value='/question/qslist'/>">질문게시판</a></li>
+    							<li class="nav-item"><a class="nav-link" href="contact.html">통계</a></li>
+    							<li class="nav-item"><a class="nav-link" href="<c:url value='/notice/notlist'/>">공지사항</a></li>
+    							<li class="nav-item"><a class="nav-link" href="<c:url value='/faq/faqlist'/>">FAQ</a></li>
+    							<li class="nav-item"><span class="nav-link">[ ${member.NAME}님 반갑습니다. ]</span></li>
+							</c:if>
                          </ul>
                     </div>
                 </div>

@@ -43,4 +43,18 @@ public class MemberMapperTests {
 //		
 //		mapper.memberjoin(member);
 //	}
+	
+	// 로그인 테스트
+	@Test
+	public void memberlogin() {
+		
+		MemberVO member = new MemberVO();
+		
+		member.setEMAIL("bb3@bb.com");
+		member.setPW("13");
+		
+		mapper.memberlogin(member);
+		System.out.println("결과 값 : " + mapper.memberlogin(member));
+		
+	}
 }
