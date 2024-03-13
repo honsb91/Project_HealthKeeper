@@ -5,27 +5,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.co.mapper.NoticeMapper">
  
  	<!-- 공지사항 등록 -->
- 	<insert id="notregistr" parameterType="kr.co.model.NoticeVO" useGeneratedKeys="true">
-    	<selectKey keyProperty="NOTICE_BNO" resultType="int" order="AFTER">
-        	SELECT ISEQ$$_87956.CURRVAL FROM DUAL
-    	</selectKey>
-    		INSERT INTO NOTICE (NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER)
-    		VALUES (#{NOTICE_TITLE}, #{NOTICE_CONTENT}, #{NOTICE_WRITER})
-	</insert>
+ 	<insert id="notregistr" >
+    INSERT INTO NOTICE (TITLE, CONTENT, MEMBER_ID)
+    VALUES (#{TITLE, jdbcType=VARCHAR}, #{CONTENT, jdbcType=VARCHAR}, #{MEMBER_ID})
+</insert>
  	
  	<!-- 공지사항 목록 -->
     <select id="getlist" resultType="kr.co.model.NoticeVO">
  		SELECT * FROM NOTICE
- 		ORDER BY NOTICE_BNO DESC
+ 		ORDER BY NOTICE_ID DESC
     </select>
     
     <!-- 공지사항 목록(페이징 유지처리) -->
     <select id="getListPaging" resultType="kr.co.model.NoticeVO">
     <![CDATA[
-        SELECT NOTICE_BNO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER, NOTICE_REGDATE, NOTICE_VIEWS
+        SELECT NOTICE_ID, TITLE, CONTENT, MEMBER_ID, TIME, READ_CNT
         FROM (
               SELECT /*+INDEX_DESC(NOTICE PK_NOTICE) */ 
-              ROWNUM AS RN, NOTICE_BNO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER, NOTICE_REGDATE,NOTICE_VIEWS
+              ROWNUM AS RN, NOTICE_ID, TITLE, CONTENT, MEMBER_ID, TIME, READ_CNT
               FROM NOTICE 
               WHERE ROWNUM <= #{pageNum} * #{amount} 
               ]]>
@@ -41,28 +38,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 공지사항 조회 -->
     <select id="getPage" resultType="kr.co.model.NoticeVO">
         SELECT * FROM NOTICE 
-        WHERE NOTICE_BNO = #{NOTICE_BNO}
+        WHERE NOTICE_ID = #{NOTICE_ID}
     </select>
     
     <!-- 공지사항 수정 -->
     <update id="notmodify">
         UPDATE NOTICE 
-        SET NOTICE_TITLE = #{NOTICE_TITLE, jdbcType=VARCHAR},
-        NOTICE_CONTENT = #{NOTICE_CONTENT, jdbcType=VARCHAR}
-        WHERE NOTICE_BNO = #{NOTICE_BNO}
+        SET TITLE = #{TITLE, jdbcType=VARCHAR},
+        CONTENT = #{CONTENT, jdbcType=VARCHAR}
+        WHERE NOTICE_ID = #{NOTICE_ID}
     </update>
     
     <!-- 공지사항 삭제 -->
     <delete id="notdelete">
         DELETE FROM NOTICE 
-        WHERE NOTICE_BNO = #{NOTICE_BNO}
+        WHERE NOTICE_ID = #{NOTICE_ID}
     </delete>
     
     <!-- 공지사항 게시글 총 갯수 -->
     <select id="getTotal" resultType="int">
         SELECT COUNT(*) FROM NOTICE
         <if test="keyword != null">
-        	WHERE NOTICE_BNO > 0 <include refid="notcriteria"></include>
+        	WHERE NOTICE_ID > 0 <include refid="notcriteria"></include>
         </if>
     </select>
     
@@ -73,13 +70,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 <trim prefix="OR">
                     <choose>
                         <when test="type == 'T'.toString()">
-                            NOTICE_TITLE LIKE '%'||#{keyword}||'%' 
+                            TITLE LIKE '%'||#{keyword}||'%' 
                         </when>
                         <when test="type == 'C'.toString()">
-                            NOTICE_CONTENT LIKE '%'||#{keyword}||'%' 
+                            CONTENT LIKE '%'||#{keyword}||'%' 
                         </when>
                         <when test="type == 'W'.toString()">
-                            NOTICE_WRITER LIKE '%'||#{keyword}||'%' 
+                            MEMBER_ID LIKE '%'||#{keyword}||'%' 
                         </when>
                     </choose>
                 </trim>
@@ -91,23 +88,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="noticeViews">
     	UPDATE NOTICE
     	SET 
-    	NOTICE_VIEWS = NOTICE_VIEWS + 1
-    	WHERE NOTICE_BNO = #{NOTICE_BNO}
+    	READ_CNT = READ_CNT + 1
+    	WHERE NOTICE_ID = #{NOTICE_ID}
     </update> 
     
     <!-- 공지사항 파일첨부 -->
-    <insert id="insertFile" parameterType="hashMap">
-    	INSERT INTO FILES( FILE_ID, FILE_NAME, FILE_PATH, FILE_SIZE, NOTICE_BNO )
-    	VALUES(FILES_SEQ.NEXTVAL,#{FILE_NAME},#{FILE_PATH},#{FILE_SIZE},#{NOTICE_BNO, jdbcType=NUMERIC})
-    </insert>
+    <!-- <insert id="insertFile" parameterType="hashMap">
+    	INSERT INTO FILES( FILE_ID, FILE_NAME, FILE_PATH, FILE_SIZE, NOTICE_ID )
+    	VALUES(FILES_SEQ.NEXTVAL,#{FILE_NAME},#{FILE_PATH},#{FILE_SIZE},#{NOTICE_ID, jdbcType=NUMERIC})
+    </insert> -->
     
     <!-- 공지사항 수정시 파일추가 -->
-    <insert id="updateinsertFile" parameterType="hashMap">
-    INSERT INTO FILES (FILE_ID, FILE_NAME, FILE_PATH, FILE_SIZE, NOTICE_BNO)
-    VALUES (FILES_SEQ.NEXTVAL, #{FILE_NAME}, #{FILE_PATH}, #{FILE_SIZE}, #{NOTICE_BNO, jdbcType=NUMERIC})
-</insert>
+    <!-- <insert id="updateinsertFile" parameterType="hashMap">
+    INSERT INTO FILES (FILE_ID, FILE_NAME, FILE_PATH, FILE_SIZE, NOTICE_ID)
+    VALUES (FILES_SEQ.NEXTVAL, #{FILE_NAME}, #{FILE_PATH}, #{FILE_SIZE}, #{NOTICE_ID, jdbcType=NUMERIC})
+</insert> -->
     
-    <!-- 공지사항 첨부파일 조회 -->
+    <!--  공지사항 첨부파일 조회 
     <select id="selectFileList" parameterType="int" resultType="kr.co.model.FilesVO">
     	SELECT FILE_ID, 
            	   FILE_NAME,
@@ -115,32 +112,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                ROUND(FILE_SIZE/1024,1) AS FILE_SIZE,
                FILE_REGDATE
         FROM FILES
-        WHERE NOTICE_BNO = #{NOTICE_BNO}
+        WHERE NOTICE_ID = #{NOTICE_ID}
         ORDER BY FILE_ID ASC
-	</select>
+	</select> -->
 	
 	<!-- 공지사항 첨부파일 조회 -->
-    <select id="updateFileList" parameterType="int" resultType="kr.co.model.FilesVO">
+    <!-- <select id="updateFileList" parameterType="int" resultType="kr.co.model.FilesVO">
     	SELECT FILE_ID, 
            	   FILE_NAME,
                FILE_PATH,
                ROUND(FILE_SIZE/1024,1) AS FILE_SIZE,
                FILE_REGDATE
         FROM FILES
-        WHERE NOTICE_BNO = #{NOTICE_BNO}
+        WHERE NOTICE_ID = #{NOTICE_ID}
         ORDER BY FILE_ID ASC
 	</select>
 	
-	<!-- 공지사항 첨부파일 다운 -->
+	공지사항 첨부파일 다운
 	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
 		SELECT FILE_NAME
 		FROM FILES
 		WHERE FILE_ID = #{FILE_ID}
 	</select>
 	
-	<!-- 첨부파일 삭제 -->
+	첨부파일 삭제
 	<delete id="deleteFile" parameterType="hashMap">
 		DELETE FROM FILES
-		WHERE NOTICE_BNO = #{NOTICE_BNO}
-	</delete>
+		WHERE NOTICE_ID = #{NOTICE_ID}
+	</delete> -->
 </mapper>

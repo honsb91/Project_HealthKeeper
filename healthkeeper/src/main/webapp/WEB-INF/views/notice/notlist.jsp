@@ -38,15 +38,15 @@
 		</thead>
 			<c:forEach items="${notlist}" var="list">
             	<tr>
-                	<td><c:out value="${list.NOTICE_BNO}"/></td>
+                	<td><c:out value="${list.NOTICE_ID}"/></td>
                 	<td>
-                		<a class="move" href='<c:out value="${list.NOTICE_BNO}"/>'>
-        					<c:out value="${list.NOTICE_TITLE}"/>
+                		<a class="move" href='<c:out value="${list.NOTICE_ID}"/>'>
+        					<c:out value="${list.TITLE}"/>
     					</a>
                     </td>
-                	<td><c:out value="${list.NOTICE_WRITER}"/></td>
-                	<td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.NOTICE_REGDATE}"/></td>
-                	<td><c:out value="${list.NOTICE_VIEWS}"/></td>
+                	<td><c:out value="${list.MEMBER_ID}"/></td>
+                	<td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.TIME}"/></td>
+                	<td><c:out value="${list.READ_CNT}"/></td>
             	</tr>
         	</c:forEach>
 	</table>
@@ -125,7 +125,7 @@
     $(".move").on("click", function(e){
         e.preventDefault();
         
-        moveForm.append("<input type='hidden' name='NOTICE_BNO' value='"+ $(this).attr("href")+ "'>");
+        moveForm.append("<input type='hidden' name='NOTICE_ID' value='"+ $(this).attr("href")+ "'>");
         moveForm.attr("action", "/notice/notget");
         moveForm.submit();
     });

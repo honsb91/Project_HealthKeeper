@@ -5,27 +5,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.co.mapper.QsMapper">
 
 	<!-- 게시판 등록 -->
-	<insert id="qsregistr" parameterType="kr.co.model.QsVO" useGeneratedKeys="true">
-    	<selectKey keyProperty="QS_BNO" resultType="int" order="AFTER">
-        	SELECT ISEQ$$_88612.CURRVAL FROM DUAL
-    	</selectKey>
-    		INSERT INTO QUESTION (QS_TITLE, QS_CONTENT, QS_WRITER)
-    		VALUES (#{QS_TITLE}, #{QS_CONTENT}, #{QS_WRITER})
+	<insert id="qsregistr" parameterType="kr.co.model.QsVO" >
+    		INSERT INTO QUESTION (TITLE, CONTENT, MEMBER_ID)
+    		VALUES (#{TITLE}, #{CONTENT}, #{MEMBER_ID})
 	</insert>
 	
 	<!-- 게시판 목록 -->
 	<select id="getlist" resultType="kr.co.model.QsVO">
 		SELECT * FROM QUESTION
-		ORDER BY QS_BNO DESC
+		ORDER BY QUE_ID DESC
 	</select>
 	
 	<!-- 게시판 목록(페이징 유지처리) -->
 	<select id="getlistPaging" resultType="kr.co.model.QsVO">
     <![CDATA[
-        SELECT QS_BNO, QS_TITLE, QS_CONTENT, QS_WRITER, QS_REGDATE, QS_VIEWS
+        SELECT QUE_ID, TITLE, CONTENT, MEMBER_ID, TIME, READ_CNT
         FROM(        
               SELECT /*+INDEX_DESC(QUESTION PK_QUESTION) */ 
-              ROWNUM AS RN, QS_BNO, QS_TITLE, QS_CONTENT, QS_WRITER, QS_REGDATE, QS_VIEWS
+              ROWNUM AS RN, QUE_ID, TITLE, CONTENT, MEMBER_ID, TIME, READ_CNT
               FROM QUESTION 
               WHERE ROWNUM <= #{pageNum} * #{amount}
     	]]>
@@ -42,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTotal" resultType="int">
 		SELECT COUNT (*) FROM QUESTION
 		<if test="Keyword != null">
-			WHERE QS_BNO > 0 <include refid="qscriteria"></include>
+			WHERE QUE_ID > 0 <include refid="qscriteria"></include>
 		</if>
 	</select>
 	
@@ -53,13 +50,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 <trim prefix="OR">
                     <choose>
                         <when test="type == 'T'.toString()">
-                            QS_TITLE LIKE '%'||#{keyword}||'%' 
+                            TITLE LIKE '%'||#{keyword}||'%' 
                         </when>
                         <when test="type == 'C'.toString()">
-                            QS_CONTENT LIKE '%'||#{keyword}||'%' 
+                            CONTENT LIKE '%'||#{keyword}||'%' 
                         </when>
                         <when test="type == 'W'.toString()">
-                            QS_WRITER LIKE '%'||#{keyword}||'%' 
+                            MEMBER_ID LIKE '%'||#{keyword}||'%' 
                         </when>
                     </choose>
                 </trim>
@@ -70,29 +67,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시판 조회 -->
 	<select id="getpage" resultType="kr.co.model.QsVO">
 		SELECT * FROM QUESTION
-		WHERE QS_BNO = #{QS_BNO}
+		WHERE QUE_ID = #{QUE_ID}
 	</select>
 	
 	<!-- 게시판 조회수 -->
 	<update id="qsViews">
 		UPDATE QUESTION
 		SET
-		QS_VIEWS = QS_VIEWS + 1
-		WHERE QS_BNO = #{QS_BNO}
+		READ_CNT = READ_CNT + 1
+		WHERE QUE_ID = #{QUE_ID}
 	</update>
 	
 	<!-- 게시판 수정 -->
 	<update id="update">
 		UPDATE QUESTION
 		SET
-		QS_TITLE = #{QS_TITLE},
-		QS_CONTENT = #{QS_CONTENT}
-		WHERE QS_BNO = #{QS_BNO}
+		TITLE = #{TITLE},
+		CONTENT = #{CONTENT}
+		WHERE QUE_ID = #{QUE_ID}
 	</update>
 	
 	<!-- 게시판 삭제 -->
 	<delete id="delete">
 		DELETE FROM QUESTION
-		WHERE QS_BNO = #{QS_BNO}
+		WHERE QUE_ID = #{QUE_ID}
 	</delete>
 </mapper>

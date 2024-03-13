@@ -26,14 +26,18 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	// 공지사항 등록
 	@Override
-	public void notregistr(NoticeVO notice , MultipartHttpServletRequest notRequest) throws Exception {
-		mapper.notregistr(notice);
-		
-		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(notice, notRequest);
-		int size = list.size();
-		for(int i=0; i<size; i++) {
-			mapper.insertFile(list.get(i));
-		}
+	public void notregistr(NoticeVO notice ) throws Exception {
+	    mapper.notregistr(notice);
+	    
+	    // 파일 첨부를 선택적으로 처리하기 위해 파일 첨부 필드가 있는지 확인합니다.
+//	    if (notRequest.getFile("file") != null && !notRequest.getFile("file").isEmpty()) {
+//	        // 파일이 첨부된 경우에만 파일 정보를 처리합니다.
+//	        List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(notice, notRequest);
+//	        int size = list.size();
+//	        for(int i = 0; i < size; i++) {
+//	            mapper.insertFile(list.get(i));
+//	        }
+//	    }
 	}
 
 	// 공지사항 목록
@@ -50,8 +54,8 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 공지사항 조회
 	@Override
-	public NoticeVO getPage(int NOTICE_BNO) {
-		return mapper.getPage(NOTICE_BNO);
+	public NoticeVO getPage(int NOTICE_ID) {
+		return mapper.getPage(NOTICE_ID);
 	}
 
 	// 공지사항 수정
@@ -67,8 +71,8 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 공지사항 삭제
 	@Override
-	public int notdelete(int NOTICE_BNO) {
-		return mapper.notdelete(NOTICE_BNO);
+	public int notdelete(int NOTICE_ID) {
+		return mapper.notdelete(NOTICE_ID);
 	}
 
 	// 공지사항 총 갯수
@@ -79,32 +83,32 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 공지사항 조회수
 	@Override
-	public int noticeViews(int NOTICE_BNO) {
-		return mapper.noticeViews(NOTICE_BNO);
+	public int noticeViews(int NOTICE_ID) {
+		return mapper.noticeViews(NOTICE_ID);
 	}
 
 	// 공지사항 첨부파일 조회
-	@Override
-	public List<FilesVO> selectFileList(int NOTICE_BNO) {
-		return mapper.selectFileList(NOTICE_BNO);
-	}
+//	@Override
+//	public List<FilesVO> selectFileList(int NOTICE_ID) {
+//		return mapper.selectFileList(NOTICE_ID);
+//	}
 
 	// 공지사항 첨부파일 다운로드
-	@Override
-	public Map<String, Object> selectFileInfo(Map<String, Object> map)throws Exception {
-		return mapper.selectFileInfo(map);
-	}
+//	@Override
+//	public Map<String, Object> selectFileInfo(Map<String, Object> map)throws Exception {
+//		return mapper.selectFileInfo(map);
+//	}
 
 	// 공지사항 첨부파일 삭제
-	@Override
-	public int deleteFile(int NOTICE_BNO) throws Exception{
-		return mapper.deleteFile(NOTICE_BNO);
-	}
+//	@Override
+//	public int deleteFile(int NOTICE_ID) throws Exception{
+//		return mapper.deleteFile(NOTICE_ID);
+//	}
 
 	// 공지사항 파일업로드 수정
-	@Override
-	public List<FilesVO> updateFileList(int NOTICE_BNO) {
-		return mapper.updateFileList(NOTICE_BNO);
-	}
+//	@Override
+//	public List<FilesVO> updateFileList(int NOTICE_ID) {
+//		return mapper.updateFileList(NOTICE_ID);
+//	}
 
 }

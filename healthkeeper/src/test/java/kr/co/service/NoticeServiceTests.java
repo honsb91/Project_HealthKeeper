@@ -23,17 +23,17 @@ public class NoticeServiceTests {
     private NoticeService service;
     
     // 공지사항 등록 테스트
-//    @Test
-//    public void testEnroll() {
-//        
-//        NoticeVO vo = new NoticeVO();
-//        
-//        vo.setNOTICE_TITLE("공지사항 service 테스트");
-//        vo.setNOTICE_CONTENT("공지사항 service 테스트중입니다.");
-//        vo.setNOTICE_WRITER("공지사항 서비스관리자");
-//        
-//        service.notregistr(vo);
-//    }
+     @Test
+     public void testEnroll() throws Exception{
+        
+        NoticeVO vo = new NoticeVO();
+        
+        vo.setTITLE("공지사항 service 테스트");
+        vo.setCONTENT("공지사항 service 테스트중입니다.");
+        vo.setMEMBER_ID(2);
+        
+       service.notregistr(vo);
+    }
     
     // 공지사항 목록 테스트
 //    @Test
@@ -78,14 +78,14 @@ public class NoticeServiceTests {
 //    }
     
     // 공지사항 목록(페이징 적용) 테스트
-    @Test
-    public void testGetListPaging() {
-        
-        NotCriteria ncri = new NotCriteria();
-        
-        List list = service.getListPaging(ncri);
-        
-        list.forEach(notice -> log.info("" + notice));
-    }
+//    @Test
+//    public void testGetListPaging() {
+//        
+//        NotCriteria ncri = new NotCriteria();
+//        
+//        List list = service.getListPaging(ncri);
+//        
+//        list.forEach(notice -> log.info("" + notice));
+//    }
     
 }

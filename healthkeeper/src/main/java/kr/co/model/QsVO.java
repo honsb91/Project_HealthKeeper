@@ -7,21 +7,24 @@ import lombok.Data;
 public class QsVO {
 	
 	// 게시판 번호
-	private int QS_BNO;
+	private int QUE_ID;
 		
 	// 게시판 제목
-	private String QS_TITLE;
+	private String TITLE;
 		
 	// 게시판 내용
-	private String QS_CONTENT;
+	private String CONTENT;
 		
 	// 게시판 작성일자
-	private Date QS_REGDATE;
+	private Date TIME;
 		
 	// 게시판 작성자
-	private String QS_WRITER;
+	private int MEMBER_ID;
+	
+	// 게시판 카테고리?
+	private int CATEGORY_ID;
 		
 	// 게시판 조회수
-	private int QS_VIEWS;
+	private int READ_CNT;
 
 }

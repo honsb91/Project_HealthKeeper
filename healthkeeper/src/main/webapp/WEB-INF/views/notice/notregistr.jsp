@@ -10,18 +10,18 @@
 <body>
 <h1>공지사항 작성페이지</h1>
 
-<form id="noticeForm" action="/notice/notregistr" method="post" enctype="multipart/form-data">
+<form id="noticeForm" action="/notice/notregistr" method="post">
     <div class="input_wrap">
         <label>Title</label>
-        <input name="NOTICE_TITLE">
+        <input name="TITLE">
     </div>
     <div class="input_wrap">
         <label>Content</label>
-        <textarea rows="3" name="NOTICE_CONTENT"></textarea>
+        <textarea rows="3" name="CONTENT"></textarea>
     </div>
     <div class="input_wrap">
         <label>Writer</label>
-        <input name="NOTICE_WRITER">
+        <input name="MEMBER_ID">
     </div>
     <div id="fileIndex">
         <div>
@@ -44,6 +44,19 @@ $(document).ready(function(){
     $(document).on("click", ".fileDelBtn", function(){
         $(this).parent().remove();
     });
+});
+
+// 파일 입력 필드에 변경이 있을 때마다 호출되는 함수
+document.getElementById("fileInput").addEventListener("change", function() {
+    var fileInput = document.getElementById("fileInput");
+    var submitButton = document.getElementById("submitButton");
+
+    // 파일이 선택되었는지 확인
+    if (fileInput.files.length > 0) {
+        submitButton.disabled = false; // 파일이 선택된 경우 등록 버튼 활성화
+    } else {
+        submitButton.disabled = true; // 파일이 선택되지 않은 경우 등록 버튼 비활성화
+    }
 });
 </script>
 </body>

@@ -10,15 +10,15 @@
 <form action="/question/qsregistr" method="post">
 	<div class="input_wrap">
 		<label>제목</label>
-		<input name="QS_TITLE">
+		<input name="TITLE">
 	</div>
 	<div class="input_wrap">
 		<label>내용</label>
-		<textarea rows="3" name="QS_CONTENT"></textarea>
+		<textarea rows="3" name="CONTENT"></textarea>
 	</div>
 	<div class="input_wrap">
 		<label>작성자</label>
-		<input name="QS_WRITER">
+		<input name="MEMBER_ID">
 	</div>
 	<button class="qsbtn">등록</button>
 </form>

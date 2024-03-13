@@ -49,7 +49,7 @@ public class FileUtils {
                 fileMap.put("FILE_NAME", FILE_NAME);
                 fileMap.put("FILE_PATH", filePath);
                 fileMap.put("FILE_SIZE", multipartFile.getSize());
-                fileMap.put("NOTICE_BNO", notice.getNOTICE_BNO());
+                fileMap.put("NOTICE_ID", notice.getNOTICE_ID());
                 list.add(fileMap);
             }
         }
@@ -69,7 +69,7 @@ public class FileUtils {
 	        String FILE_NAME = null;
 	        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 	        Map<String, Object> listMap = null;
-	        int NOTICE_BNO = notice.getNOTICE_BNO();
+	        int NOTICE_ID = notice.getNOTICE_ID();
 
 	        while (iterator.hasNext()) {
 	            multipartFile = mpRequest.getFile(iterator.next());
@@ -95,7 +95,7 @@ public class FileUtils {
 	                fileMap.put("FILE_NAME", FILE_NAME);
 	                fileMap.put("FILE_PATH", filePath);
 	                fileMap.put("FILE_SIZE", multipartFile.getSize());
-	                fileMap.put("NOTICE_BNO", NOTICE_BNO);
+	                fileMap.put("NOTICE_ID", NOTICE_ID);
 	                list.add(fileMap);
 	            }
 	        }

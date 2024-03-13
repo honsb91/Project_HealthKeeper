@@ -63,22 +63,22 @@ public class QuestionController {
 	
 	// 질문게시판 조회
 	@GetMapping("/qsget")
-	public void qsGetPageGET(int QS_BNO, QsVO vo, Model model, QsCriteria qcri) {
+	public void qsGetPageGET(int QUE_ID, QsVO vo, Model model, QsCriteria qcri) {
 		// 조회수 관련 로직
-		service.qsViews(QS_BNO);
+		service.qsViews(QUE_ID);
 		
-		model.addAttribute("pageInfo", service.getpage(QS_BNO));
+		model.addAttribute("pageInfo", service.getpage(QUE_ID));
 		model.addAttribute("qcri", qcri);
 		
-		List<QsReplyVO> replyList = replyservice.readReply(vo.getQS_BNO());
+		List<QsReplyVO> replyList = replyservice.readReply(vo.getQUE_ID());
 		model.addAttribute("replyList", replyList);
 	}
 	
 	// 질문게시판 수정페이지 진입
 	@GetMapping("/qsupdate")
-	public void qsUpdateGET(int QS_BNO, Model model, QsCriteria qcri) {
+	public void qsUpdateGET(int QUE_ID, Model model, QsCriteria qcri) {
 		
-		model.addAttribute("pageInfo", service.getpage(QS_BNO));
+		model.addAttribute("pageInfo", service.getpage(QUE_ID));
 		model.addAttribute("qcri", qcri);
 	}
 	
@@ -94,9 +94,9 @@ public class QuestionController {
 	
 	// 질문게시판 삭제
 	@PostMapping("/qsdelete")
-	public String qsDeletePOST(int QS_BNO, RedirectAttributes rttr) {
+	public String qsDeletePOST(int QUE_ID, RedirectAttributes rttr) {
 		
-		service.delete(QS_BNO);
+		service.delete(QUE_ID);
 		rttr.addFlashAttribute("result", "qsdelete success");
 		
 		return "redirect:/question/qslist";
@@ -146,9 +146,9 @@ public class QuestionController {
 	
 	// 질문게시판 댓글삭제 페이지 진입
 	@GetMapping("/replydelete")
-	public void replyDeleteGET(QsCriteria qcri, Model model, int QS_BNO){
+	public void replyDeleteGET(QsCriteria qcri, Model model, int QUE_ID){
 			
-		model.addAttribute("replydelete", replyservice.selectReply(QS_BNO));
+		model.addAttribute("replydelete", replyservice.selectReply(QUE_ID));
 		model.addAttribute("qcri", qcri);
 			
 	}

@@ -38,15 +38,15 @@
 		</thead>
 			<c:forEach items="${qslist}" var="qslist">
             	<tr>
-                	<td><c:out value="${qslist.QS_BNO}"/></td>
+                	<td><c:out value="${qslist.QUE_ID}"/></td>
                 	<td>
-                		<a class="move" href='<c:out value="${qslist.QS_BNO}"/>'>
-        					<c:out value="${qslist.QS_TITLE}"/>
+                		<a class="move" href='<c:out value="${qslist.QUE_ID}"/>'>
+        					<c:out value="${qslist.TITLE}"/>
     					</a>
                     </td>
-                	<td><c:out value="${qslist.QS_WRITER}"/></td>
-                	<td><fmt:formatDate pattern="yyyy/MM/dd" value="${qslist.QS_REGDATE}"/></td>
-                	<td><c:out value="${qslist.QS_VIEWS}"/></td>
+                	<td><c:out value="${qslist.MEMBER_ID}"/></td>
+                	<td><fmt:formatDate pattern="yyyy/MM/dd" value="${qslist.TIME}"/></td>
+                	<td><c:out value="${qslist.READ_CNT}"/></td>
             	</tr>
         	</c:forEach>
 	</table>
@@ -125,7 +125,7 @@
     $(".move").on("click", function(e){
         e.preventDefault();
         
-        moveForm.append("<input type='hidden' name='QS_BNO' value='"+ $(this).attr("href")+ "'>");
+        moveForm.append("<input type='hidden' name='QUE_ID' value='"+ $(this).attr("href")+ "'>");
         moveForm.attr("action", "/question/qsget");
         moveForm.submit();
     });

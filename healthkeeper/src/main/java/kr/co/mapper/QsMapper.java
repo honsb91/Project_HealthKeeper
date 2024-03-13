@@ -20,15 +20,15 @@ public interface QsMapper {
 	public int getTotal(QsCriteria qcri);
 	
 	// 게시판 조회
-	public QsVO getpage(int QS_BNO);
+	public QsVO getpage(int QUE_ID);
 	
 	// 게시판 수정
 	public int update(QsVO qs);
 	
 	// 게시판 삭제
-	public int delete(int QS_BNO);
+	public int delete(int QUE_ID);
 	
 	// 게시판 조회수
-	public int qsViews(int QS_BNO);
+	public int qsViews(int QUE_ID);
 
 }

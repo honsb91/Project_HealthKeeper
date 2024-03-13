@@ -12,26 +12,26 @@
 </head>
 <body>
 <h1>수정 페이지</h1>
-<form id="notmodifyForm" action="/notice/notmodify" method="post" enctype="multipart/form-data">
+<form id="notmodifyForm" action="/notice/notmodify" method="post" >
     <div class="input_wrap">
         <label>게시판 번호</label>
-        <input name="NOTICE_BNO" readonly="readonly" value='<c:out value="${pageInfo.NOTICE_BNO}"/>' >
+        <input name="NOTICE_ID" readonly="readonly" value='<c:out value="${pageInfo.NOTICE_ID}"/>' >
     </div>
     <div class="input_wrap">
         <label>게시판 제목</label>
-        <input name="NOTICE_TITLE" value='<c:out value="${pageInfo.NOTICE_TITLE}"/>' >
+        <input name="TITLE" value='<c:out value="${pageInfo.TITLE}"/>' >
     </div>
     <div class="input_wrap">
         <label>게시판 내용</label>
-        <textarea rows="3" name="NOTICE_CONTENT"><c:out value="${pageInfo.NOTICE_CONTENT}"/></textarea>
+        <textarea rows="3" name="CONTENT"><c:out value="${pageInfo.CONTENT}"/></textarea>
     </div>
     <div class="input_wrap">
         <label>게시판 작성자</label>
-        <input name="NOTICE_WRITER" readonly="readonly" value='<c:out value="${pageInfo.NOTICE_WRITER}"/>' >
+        <input name="MEMBER_ID" readonly="readonly" value='<c:out value="${pageInfo.MEMBER_ID}"/>' >
     </div>
     <div class="input_wrap">
         <label>게시판 등록일</label>
-        <input name="NOTICE_REGDATE" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.NOTICE_REGDATE}"/>' >
+        <input name="TIME" readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.TIME}"/>' >
     </div>
     <div class="fileIndex">
         <!-- 기존 파일 목록 표시 -->
@@ -54,7 +54,7 @@
     </div>
 </form>
 <form id="infoForm" action="/notice/notmodify" method="get">
-    <input type="hidden" id="NOTICE_BNO" name="NOTICE_BNO" value='<c:out value="${pageInfo.NOTICE_BNO}"/>'>
+    <input type="hidden" id="NOTICE_ID" name="NOTICE_ID" value='<c:out value="${pageInfo.NOTICE_ID}"/>'>
     <input type="hidden" name="pageNum" value='<c:out value="${ncri.pageNum}"/>'>
     <input type="hidden" name="amount" value='<c:out value="${ncri.amount}"/>'>
     <input type="hidden" name="type" value="${ncri.type }">
